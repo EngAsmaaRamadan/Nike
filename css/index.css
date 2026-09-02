@@ -1,0 +1,135 @@
+body{
+	background: -webkit-linear-gradient(to right,#2c5364,#203a43,#0f2027);
+    background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
+}
+
+#Gallery .row .item{
+	width: 250px;
+	height: 250px;
+	margin: auto;
+	border-radius: 10px;
+}
+
+#Gallery .row .item img{
+	transform: scale(1.0);
+	transition-duration: 0.5s;
+}
+
+#Gallery .row .item:hover img{
+	transform: scale(1.2);
+}
+
+#Gallery .row .item .layout{
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.5);
+	color: #fff;
+	font-size: 30px;
+	opacity: 0;
+	transition-duration: 0.5s;
+}
+
+#Gallery .row .item:hover .layout{
+	opacity: 1;
+}
+
+#Gallery .row .item .layout i{
+	transition-duration: 0.5s;
+	transform: rotate(0deg);
+	cursor: pointer;
+}
+
+#Gallery .row .item .layout i:hover{
+	transform: rotate(180deg);
+	color: var(--gold-color);
+}
+
+.popup{
+	width: 100%;
+	height: 100%;
+	display: none;
+	opacity: 0;
+	transition-duration: 1s;
+	background: linear-gradient(to right,rgba(44, 83, 100, 0.5), rgba(32, 58, 67, 0.5), rgba(15, 32, 39, 0.5));
+}
+
+.popup .cover{
+	overflow: auto;
+    position: absolute;
+    left: 0%;
+    bottom: 20px;
+    width: 100%;
+}
+
+.popup.active{/*first turn to display flex*/
+	display: flex;
+}
+
+.popup.show{/*then after some milli seconds op1 to popup*/
+	opacity: 1;
+}
+
+.popup .box{
+	width: 50%;
+	max-width: 500px;
+	border-radius: 10px;
+}
+
+.popup .box i{	
+	color: var(--gold-color);
+	background:linear-gradient(to right, #2c5364, #203a43, #0f2027);
+}
+
+.popup .box i.close{
+	top: 20px;
+	right: 20px;
+}
+
+.popup .box i.next{
+	right: 20px;
+}
+
+.popup .box i.prev{
+	left: 20px;
+}
+
+.popup .box i.next,
+.popup .box i.prev{
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.popup .box i{
+	position: absolute;
+}
+
+.popup .box ul{
+	column-gap: 10px;
+    width: fit-content;
+    margin-inline: auto;
+}
+
+.popup .box i,
+.popup .box ul li{
+	width: 32px;
+	height: 32px;
+	background:linear-gradient(to right, #2c5364, #203a43, #0f2027);
+	color: var(--gold-color);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+	font-size: 15px;
+	cursor: pointer;
+	box-shadow: #ffffff1a 0 4px 12px;
+	text-align: center;
+}
+
+.popup .box ul li{
+	transition-duration: 1s;
+	font-weight: 500;
+}
+
+.popup .box ul li.active{
+	background: #fff;
+}

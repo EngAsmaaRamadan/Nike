@@ -1,0 +1,75 @@
+@media (max-width: 1300px) {
+    .popup .box{
+    	width: 80%;
+        max-width: 280px;
+    }
+
+    .popup .cover{
+    	left: 10%;
+    	width: 80%;
+    }
+
+    .popup .box i, .popup .box ul li{
+    	width: 25px;
+    	height: 25px;
+    	font-size: 13px;
+    }
+
+    .popup .box i.close{
+    	font-size: 10px;
+    }
+}
+
+@media (min-width: 371px) and (max-width: 1300px) {
+    
+}
+
+@media (min-width: 577px) and (max-width: 1300px) {
+    .popup .box{
+        max-width: 350px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1300px) {
+    .popup .box {
+        max-width: 400px;
+    }
+
+    .popup .cover{
+		overflow: initial;
+		left: 0%;
+        width: 100%;
+	}
+	
+    .popup .box i,
+    .popup .box ul li{
+    	width: 30px;
+        height: 30px;
+        font-size: 15px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1300px) {
+	.popup .box {
+        max-width: 500px;
+    }
+
+    .popup .box i,
+    .popup .box ul li{
+    	width: 32px;
+        height: 32px;
+    }
+
+    .popup .box i, .popup .box ul li{
+        font-size: 16px;
+    }
+
+    .popup .box i.close{
+    	font-size: 13px;
+    }
+}
+
+@media (min-width: 1181px) and (max-width: 1300px) {
+    
+}
+/*in my sublime text write mq tab to use media extension*/
