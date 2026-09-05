@@ -7,4 +7,50 @@
 
 body{
     font-family: "Nunito", sans-serif;
+    height: 5000px;
+}
+
+section{
+    height: 100vh;
+}
+
+section#Latest{
+    background-color: #0ff;
+}
+
+section#Featured{
+    background-color: #0f0;
+}
+
+.title{
+    position: relative;
+}
+
+.title h2{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, .2);
+    letter-spacing: 1.5px;
+}
+
+.title img{
+    width: 200px;
+}
+
+.mainColor{
+    color: var(--main-color);
+}
+
+.mainButton{
+    background-color: transparent;
+    border: 1px solid var(--main-color);
+    color: var(--main-color);
+    transition-duration: 0.5s;
+}
+
+.mainButton:hover{
+    background-color: var(--main-color);
+    color: #fff;
 }
