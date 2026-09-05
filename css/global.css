@@ -1,3 +1,10 @@
 :root{
-    --gold-color:#f9ec31;
+    --main-color:#fb2527;
+    --first-color:#fb2527;
+    --second-color:#0f7ad7;
+    --third-color:#ed9721;
+}
+
+body{
+    font-family: "Nunito", sans-serif;
 }
