@@ -64,6 +64,10 @@ nav.navbar .nav-link:hover{
 	color: #777;
 }
 
+nav.navbar .nav-item a{
+	transition-duration: 0.5s;
+}
+
 nav.navbar .nav-item.active a{
 	color: var(--main-color);
 }

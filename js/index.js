@@ -6,7 +6,8 @@ let scCarousel = document.querySelector("#SC-Carousel"),
 	sectionImgs = document.querySelectorAll('.title img'),
 	navEle = document.querySelector('nav.navbar'),
 	navItems = navEle.querySelectorAll('.nav-item'),
-	sections = document.querySelectorAll('section, header');
+	sections = document.querySelectorAll('section, header'),
+	loadingPage = document.querySelector('.loading-page');
 
 //check scroll to remove opacity from nav when page loaded
 checkScrollNav();
@@ -60,4 +61,12 @@ window.addEventListener('scroll',function(){
 	sections.forEach(function(section){
 		updateNavItem(section.id);	
 	});
+});
+
+//when page loaded
+window.addEventListener('DOMContentLoaded',function(){
+	loadingPage.classList.add('hide');
+	setTimeout(function(){
+		loadingPage.classList.add('d-none');
+	},2000);
 });
