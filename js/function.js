@@ -19,3 +19,11 @@ function updateImgLogo(imgName){
 	let newHref = imgHrefArr.join('/');
 	logoIcon.href = newHref;
 }
+
+function checkScrollNav(){
+	if(window.scrollY >= 10){
+		navEle.classList.add('scrolled');
+	}else{
+		navEle.classList.remove('scrolled');
+	}
+}

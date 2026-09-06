@@ -3,7 +3,13 @@ let scCarousel = document.querySelector("#SC-Carousel"),
 	prevCarousel = scCarousel.querySelector(".prev"),
 	logoEle = document.querySelector('img#Logo'),
 	logoIcon = document.querySelector('#LogoIcon'),
-	sectionImgs = document.querySelectorAll('.title img');
+	sectionImgs = document.querySelectorAll('.title img'),
+	navEle = document.querySelector('nav.navbar'),
+	navItems = navEle.querySelectorAll('.nav-item'),
+	sections = document.querySelectorAll('section, header');
+
+//check scroll to remove opacity from nav when page loaded
+checkScrollNav();
 
 nextCarousel.addEventListener('click',function(){
 	let currentSlide = scCarousel.querySelector(".SC-Carousel-item.active"),
@@ -32,3 +38,45 @@ prevCarousel.addEventListener('click',function(){
 	})
 	updateImgLogo(currentColor);
 });
+
+navItems.forEach(function(navItem){
+	navItem.addEventListener('click',function(e){
+		e.preventDefault();
+		let currentNavItem = navEle.querySelector('.nav-item.active');
+		currentNavItem.classList.remove('active');
+		navItem.classList.add('active');
+
+		let currentSectionId = navItem.querySelector('a').getAttribute('href'),
+		currentSection = document.querySelector(currentSectionId),
+		sectionTop = currentSection.offsetTop,
+		navHeight = navEle.clientHeight;
+		
+		window.scrollTo(0,sectionTop - navHeight);
+	});
+});
+
+window.addEventListener('scroll',function(){
+	checkScrollNav();
+	sections.forEach(function(section){
+		updateNavItem(section.id);	
+	})
+	
+	
+});
+
+function updateNavItem(sectionId){
+	let section = document.querySelector(`#${sectionId}`),
+		sectionTop = section.offsetTop,
+		sectionHeight = section.clientHeight,
+		navHeight = navEle.clientHeight,
+		sectionTopWithNavHeight = sectionTop - navHeight,
+		sectionBottom = sectionTop + sectionHeight;
+	
+	if(window.scrollY >= sectionTopWithNavHeight && window.scrollY <= sectionBottom){
+		let currentNavItem = navEle.querySelector('.nav-item.active'),
+			navLinkOfSection = document.querySelector(`a[href="#${section.id}"]`);
+			currentNavItem.classList.remove('active');
+			navLinkOfSection.parentElement.classList.add('active');
+	}
+}
+
