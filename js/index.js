@@ -68,5 +68,5 @@ window.addEventListener('DOMContentLoaded',function(){
 	loadingPage.classList.add('hide');
 	setTimeout(function(){
 		loadingPage.classList.add('d-none');
-	},2000);
+	},1000);
 });

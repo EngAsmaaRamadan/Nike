@@ -8,6 +8,11 @@
 body{
     font-family: "Nunito", sans-serif;
     height: 5000px;
+    background-color: #f00;
+}
+
+a{
+    cursor: pointer;
 }
 
 .loading-page{
@@ -21,7 +26,7 @@ body{
     justify-content: center;
     align-items: center;
     background-color: #000;
-    transition-duration: 2s;
+    transition-duration: 1s;
     opacity: 1;
 }
 
@@ -31,14 +36,9 @@ body{
 
 section{
     height: 100vh;
-}
-
-section#Latest{
-    background-color: #0ff;
-}
-
-section#Featured{
-    background-color: #0f0;
+    background: #ada996;
+    background: -webkit-linear-gradient(to right,#eaeaea,#dbdbdb,#f2f2f2,#ada996);
+    background: linear-gradient(to right, #eaeaea, #dbdbdb, #f2f2f2, #ada996);
 }
 
 .title{
@@ -58,6 +58,36 @@ section#Featured{
     width: 200px;
 }
 
+.product .selectedImg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product .selectedImg img{
+    width: 60%;
+    transition-duration: 0.5s;
+    transform: scale(1.0);
+    cursor: pointer;
+}
+
+.product .selectedImg img:hover{
+    transform: scale(1.2);
+}
+
+.product .value{
+    font-size: 14px;
+}
+
+.product .info ul li{
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+}
+
 .mainColor{
     color: var(--main-color);
 }
@@ -69,7 +99,12 @@ section#Featured{
     transition-duration: 0.5s;
 }
 
-.mainButton:hover{
+.mainButton:hover,
+.mainButton.active{
     background-color: var(--main-color);
     color: #fff;
+}
+
+.mainBorder{
+    border:1px solid var(--main-color);
 }

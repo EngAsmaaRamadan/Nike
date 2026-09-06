@@ -89,6 +89,7 @@ nav.navbar ul.icons li i:hover{
 
 header #SC-Carousel{
 	position: relative;
+	overflow: hidden;
 }
 
 header #SC-Carousel > button{
@@ -201,3 +202,68 @@ header #SC-Carousel .SC-Carousel-inner .SC-Carousel-item.active .row .part2 img:
 	opacity: 1;
 }
 
+#Offet .row div[class*="part"] .item{
+	overflow: hidden;
+	position: relative;
+}
+
+#Offet .row div[class*="part"] .item img{
+	transform: scale(1.1);
+	transition-duration: 1s;
+}
+
+#Offet .row div[class*="part"] .item:hover img{
+	transform: scale(1.0);
+}
+
+#Offet .row div[class*="part"] .item::after{
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 120%;
+	display: block;
+	width: 120%;
+	height: 100%;
+	background-color: rgba(255, 255, 255, 0.5);
+	transform: rotate(45deg);
+	transition-duration: 1s;
+}
+
+#Offet .row div[class*="part"] .item:hover::after{
+	left: -120%;
+}
+
+#Latest .product{
+	background-color: #fff;
+}
+
+#Latest .product .row li{
+	padding: 5px;
+	cursor: pointer;
+}
+
+#Latest .product .row li img{
+	transform: scale(0.8);
+	transition-duration: 0.5s;
+}
+
+#Latest .product .row li img:hover{
+	transform: scale(1.0);
+}
+
+#Latest .product .info .price{
+	color: rgb(33, 37, 41);
+}
+
+#Latest .product .part2 .item>p{
+	color: #777;
+}
+
+#Latest ul .mainButton{
+    color: #777;
+}
+
+#Latest ul .mainButton.active,
+#Latest ul .mainButton:hover{
+    color: #fff;
+}
