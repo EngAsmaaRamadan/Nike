@@ -59,24 +59,5 @@ window.addEventListener('scroll',function(){
 	checkScrollNav();
 	sections.forEach(function(section){
 		updateNavItem(section.id);	
-	})
-	
-	
+	});
 });
-
-function updateNavItem(sectionId){
-	let section = document.querySelector(`#${sectionId}`),
-		sectionTop = section.offsetTop,
-		sectionHeight = section.clientHeight,
-		navHeight = navEle.clientHeight,
-		sectionTopWithNavHeight = sectionTop - navHeight,
-		sectionBottom = sectionTop + sectionHeight;
-	
-	if(window.scrollY >= sectionTopWithNavHeight && window.scrollY <= sectionBottom){
-		let currentNavItem = navEle.querySelector('.nav-item.active'),
-			navLinkOfSection = document.querySelector(`a[href="#${section.id}"]`);
-			currentNavItem.classList.remove('active');
-			navLinkOfSection.parentElement.classList.add('active');
-	}
-}
-
