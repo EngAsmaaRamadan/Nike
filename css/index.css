@@ -341,3 +341,16 @@ header #SC-Carousel .SC-Carousel-inner .SC-Carousel-item.active .row .part2 img:
 #Featured .content .item .head ul.indicators li.active{
 	background-color: var(--main-color);
 }
+
+footer{
+	background-color: #333;
+}
+
+footer p{
+	padding-block: 8px;
+}
+
+footer span{
+	font-family: 'Agency FB', sans-serif;
+	letter-spacing: 1.5px;
+}
