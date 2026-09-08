@@ -46,23 +46,32 @@ function updateNavItem(sectionId){
 	}
 }
 
-// function prepareSizeList(sizes){
-// 	let sizeList = "";
-// 	sizes.forEach(function(size,index){
-// 		sizeList += `
-// 			<li class="mainBorder rounded-2 mainButton ${(index == 0) : "active" : ""}">${size}</li>
-// 		`;
-// 	});
-// }
+function preparePrices(price,discount){
+	return `
+		<p class="value mb-0">
+			<span class="text-decoration-line-through mainColor ${(discount == 0) ? 'd-none' : '' }">${price} <sup>$</sup></span> <span class="fw-semibold">${price * (1 - discount)} <sup>$</sup></span>
+		</p>
+	`;
+}
 
-function prepareImagesList(images){
-	let imagesList = "";
-	images.forEach(function(img){
-		imagesList += `
-			<li class="rounded-2 mainBorder"><img src="images/products/${img}" alt="products" class="img-fluid"></li>
+function prepareSizeList(sizesList){
+	let liElements = "";
+	sizesList.forEach(function(size,index){
+		liElements += `
+			<li class="mainBorder rounded-2 mainButton ${(index == 0)? 'active' : ''}">${size}</li>
 		`;
 	});
-	return imagesList;
+	return liElements;
+}
+
+function prepareImagesList(imagesList){
+	let liElements = "";
+	imagesList.forEach(function(image){
+		liElements += `
+			<li class="rounded-2 mainBorder"><img src="images/products/${image}" alt="products" class="img-fluid"></li>
+		`;
+	});
+	return liElements;
 }
 
 // function updateCurrentColor(currentColor){

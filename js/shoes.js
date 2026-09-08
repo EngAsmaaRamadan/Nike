@@ -201,7 +201,7 @@ var latest = [
         'sizes': ['S', 'M', 'L', 'XL'],
         'colors': ['#000'],
         'price': 120.00,
-        'discount': 0.0,
+        'discount': 0.2,
         'description': `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nisi modi minus eum debitis in?
                         Aliquid doloribus, omnis eveniet inventore quod delectus dolores quia illum itaque
                         dolorem, fuga recusandae at minus eum. Dolore exercitationem hic fugiat. Eaque,

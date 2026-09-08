@@ -267,3 +267,77 @@ header #SC-Carousel .SC-Carousel-inner .SC-Carousel-item.active .row .part2 img:
 #Latest ul .mainButton:hover{
     color: #fff;
 }
+
+#Featured .content .item {
+	background-color: #fff;
+	border-radius: 10px;
+	padding: 20px;
+}
+
+#Featured .content .item .head{
+	position: relative;
+}
+
+#Featured .content .item .head img{
+	transform: scale(1);
+	transition-duration: 0.5s;
+	cursor: pointer;
+}
+
+#Featured .content .item:hover .head img{
+	transform: scale(1.2);
+}
+
+#Featured .content .item .head i{
+	box-shadow: 0 10px 15px #0003;
+	color: #000;
+	cursor: pointer;
+	width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    transition-duration: 1s;
+    position: absolute;
+    bottom: 22%;
+    left: 50%;
+    opacity: 0;
+    transform: translate(-50%, 25px);
+}
+
+#Featured .content .item:hover .head i{
+	transform: translate(-50%, 0px);
+	opacity: 1;
+	transition-delay: 0.5s;
+}
+
+#Featured .content .item .head i:hover{
+	color: #fff;
+	background-color: var(--main-color);
+}
+
+#Featured .content .item .head ul.indicators{
+	position: absolute;
+	left: 50%;
+	bottom: 0%;
+	transform: translate(-50%, 20px);
+	opacity: 0;
+	transition-duration: 1s;
+}
+
+#Featured .content .item:hover .head ul.indicators{
+	transform: translate(-50%, 0px);
+	opacity: 1;
+	transition-delay: 0.8s;
+}
+
+#Featured .content .item .head ul.indicators li{
+	width: 15px;
+	height: 15px;
+	transition-duration: 0.5s;
+}
+
+#Featured .content .item .head ul.indicators li.active{
+	background-color: var(--main-color);
+}

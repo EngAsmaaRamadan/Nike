@@ -15,6 +15,7 @@ let scCarousel = document.querySelector("#SC-Carousel"),
 
 //check scroll to remove opacity from nav when page loaded
 checkScrollNav();
+
 // if(localStorage.getItem('currentMainColor') != null ){
 // 	html.style.setProperty('--main-color',localStorage.getItem('currentMainColor'));
 // }else{
@@ -51,7 +52,7 @@ nextCarousel.addEventListener('click',function(){
 	currentSlide.classList.remove('active');
 	newSlide.classList.add('active');
 	changeMainColor(currentColor);
-	// updateImgLogo(currentColor);
+	updateImgLogo(currentColor);
 	changeImg(currentColor,logoEle,'logo');
 	// updateCurrentImg(newSrc);
 	sectionImgs.forEach(function(img){
@@ -67,7 +68,7 @@ prevCarousel.addEventListener('click',function(){
 	currentSlide.classList.remove('active');
 	newSlide.classList.add('active');
 	changeMainColor(currentColor);
-	// updateImgLogo(currentColor);
+	updateImgLogo(currentColor);
 	changeImg(currentColor,logoEle,'logo');
 	// updateCurrentImg(newSrc);
 	sectionImgs.forEach(function(img){
@@ -124,7 +125,7 @@ latest.forEach(function(product){
 							<div class="col-lg-10">
 								<div class="item h-100">
 									<div class="selectedImg h-100">
-										<img src="images/products/17-1.png" alt="products">
+										<img src="images/products/${product.images[0]}" alt="products">
 									</div>
 								</div>
 							</div>
@@ -137,16 +138,12 @@ latest.forEach(function(product){
 						<p>${product.description}</p>
 						<div class="info d-flex mb-2">
 							<h6 class="price fw-bolder mb-0 me-3">Price :</h6>
-							<p class="value mb-0"><span class="text-decoration-line-through mainColor">${product.price} <sup>$</sup></span> <span>96 <sup>$</sup></span>
-							</p>
+							${preparePrices(product.price,product.discount)}
 						</div>
 						<div class="info d-flex mt-3">
 							<h6 class="size fw-bolder mb-0 me-3">Size :</h6>
 							<ul class="list-unstyled d-flex column-gap-2">
-								<li class="mainBorder rounded-2 mainButton active">S</li>
-								<li class="mainBorder rounded-2 mainButton">M</li>
-								<li class="mainBorder rounded-2 mainButton">L</li>
-								<li class="mainBorder rounded-2 mainButton">XL</li>
+								${prepareSizeList(product.sizes)}
 							</ul>
 						</div>
 						<button class="btn mainColor mainButton">Add To Cart</button>
@@ -157,6 +154,3 @@ latest.forEach(function(product){
 	`;
 });
 
-
-
-//${prepareSizeList(product.sizes)}
