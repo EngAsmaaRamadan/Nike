@@ -4,13 +4,45 @@ let scCarousel = document.querySelector("#SC-Carousel"),
 	logoEle = document.querySelector('img#Logo'),
 	logoIcon = document.querySelector('#LogoIcon'),
 	sectionImgs = document.querySelectorAll('.title img'),
+	navImg = document.querySelector('nav img'),
 	navEle = document.querySelector('nav.navbar'),
 	navItems = navEle.querySelectorAll('.nav-item'),
 	sections = document.querySelectorAll('section, header'),
-	loadingPage = document.querySelector('.loading-page');
+	loadingPage = document.querySelector('.loading-page'),
+	latestContent = document.querySelector('#Latest .content'),
+	html = document.querySelector('html'),
+	newSrc;
 
 //check scroll to remove opacity from nav when page loaded
 checkScrollNav();
+// if(localStorage.getItem('currentMainColor') != null ){
+// 	html.style.setProperty('--main-color',localStorage.getItem('currentMainColor'));
+// }else{
+// 	updateCurrentColor(getComputedStyle(html).getPropertyValue('--main-color'));
+// }
+
+// if(localStorage.getItem('currentImgLogoHref') != null){
+// 	logoIcon.href = localStorage.getItem('currentImgLogoHref');
+// }else{
+// 	updateCurrentImgLogo(logoIcon.href);
+// }
+
+// if(localStorage.getItem('currentNavImg') != null){
+// 	navImg.src = localStorage.getItem('currentNavImg');
+// }else{
+// 	updateCurrentNavImg(navImg.src);
+// }
+
+// if(localStorage.getItem('currentsectionImg') != null){
+// 	sectionImgs.forEach(function(sectionImg){
+// 		sectionImg.src = localStorage.getItem('currentsectionImg');
+// 	});
+// }else{
+// 	updateCurrentsectionImg(sectionImgs[0].src);
+// }
+
+
+
 
 nextCarousel.addEventListener('click',function(){
 	let currentSlide = scCarousel.querySelector(".SC-Carousel-item.active"),
@@ -19,11 +51,13 @@ nextCarousel.addEventListener('click',function(){
 	currentSlide.classList.remove('active');
 	newSlide.classList.add('active');
 	changeMainColor(currentColor);
+	// updateImgLogo(currentColor);
 	changeImg(currentColor,logoEle,'logo');
+	// updateCurrentImg(newSrc);
 	sectionImgs.forEach(function(img){
 		changeImg(currentColor,img,'correct');
-	})
-	updateImgLogo(currentColor);
+	});
+	// updateCurrentsectionImg(newSrc);
 });
 
 prevCarousel.addEventListener('click',function(){
@@ -33,11 +67,13 @@ prevCarousel.addEventListener('click',function(){
 	currentSlide.classList.remove('active');
 	newSlide.classList.add('active');
 	changeMainColor(currentColor);
+	// updateImgLogo(currentColor);
 	changeImg(currentColor,logoEle,'logo');
+	// updateCurrentImg(newSrc);
 	sectionImgs.forEach(function(img){
 		changeImg(currentColor,img,'correct');
-	})
-	updateImgLogo(currentColor);
+	});
+	// updateCurrentsectionImg(newSrc);
 });
 
 navItems.forEach(function(navItem){
@@ -70,3 +106,57 @@ window.addEventListener('DOMContentLoaded',function(){
 		loadingPage.classList.add('d-none');
 	},1000);
 });
+/*prepareImagesList*/
+latest.forEach(function(product){
+	latestContent.innerHTML += `
+		<div class="product mainBorder rounded-3 pt-3 px-3 mb-3">
+			<div class="row">
+				<div class="col-lg-6 part1">
+					<div class="item">
+						<div class="row">
+							<div class="col-lg-2">
+								<div class="item">
+									<ul class="list-unstyled d-flex column-gap-2 flex-md-column row-gap-md-2">
+										${prepareImagesList(product.images)}
+									</ul>
+								</div>
+							</div>
+							<div class="col-lg-10">
+								<div class="item h-100">
+									<div class="selectedImg h-100">
+										<img src="images/products/17-1.png" alt="products">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6 part2">
+					<div class="item mb-4">
+						<h3 class="mainColor fw-normal">${product.name}</h3>
+						<p>${product.description}</p>
+						<div class="info d-flex mb-2">
+							<h6 class="price fw-bolder mb-0 me-3">Price :</h6>
+							<p class="value mb-0"><span class="text-decoration-line-through mainColor">${product.price} <sup>$</sup></span> <span>96 <sup>$</sup></span>
+							</p>
+						</div>
+						<div class="info d-flex mt-3">
+							<h6 class="size fw-bolder mb-0 me-3">Size :</h6>
+							<ul class="list-unstyled d-flex column-gap-2">
+								<li class="mainBorder rounded-2 mainButton active">S</li>
+								<li class="mainBorder rounded-2 mainButton">M</li>
+								<li class="mainBorder rounded-2 mainButton">L</li>
+								<li class="mainBorder rounded-2 mainButton">XL</li>
+							</ul>
+						</div>
+						<button class="btn mainColor mainButton">Add To Cart</button>
+					</div>
+				</div>
+			</div>
+				</div>
+	`;
+});
+
+
+
+//${prepareSizeList(product.sizes)}

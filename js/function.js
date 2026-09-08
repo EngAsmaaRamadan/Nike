@@ -1,14 +1,15 @@
 function changeMainColor(colorName){
-	let html = document.querySelector('html'),
-		currentColor = getComputedStyle(html).getPropertyValue(`--${colorName}-color`);
+	let currentColor = getComputedStyle(html).getPropertyValue(`--${colorName}-color`);
 	html.style.setProperty('--main-color',currentColor);
+	// updateCurrentColor(currentColor);
 }
 
 function changeImg(imgName,imgEle,common){
+	console.log(imgEle);
 	let imgSrc = imgEle.src,
 		imgSrcArr = imgSrc.split('/');
 	imgSrcArr[imgSrcArr.length - 1] = `${imgName}-${common}.png`;
-	let newSrc = imgSrcArr.join('/');
+	newSrc = imgSrcArr.join('/');
 	imgEle.setAttribute('src',newSrc);
 }
 
@@ -18,6 +19,7 @@ function updateImgLogo(imgName){
 	imgHrefArr[imgHrefArr.length - 1] = `${imgName}-logo.png`;
 	let newHref = imgHrefArr.join('/');
 	logoIcon.href = newHref;
+	// updateCurrentImgLogo(newHref);
 }
 
 function checkScrollNav(){
@@ -44,3 +46,37 @@ function updateNavItem(sectionId){
 	}
 }
 
+// function prepareSizeList(sizes){
+// 	let sizeList = "";
+// 	sizes.forEach(function(size,index){
+// 		sizeList += `
+// 			<li class="mainBorder rounded-2 mainButton ${(index == 0) : "active" : ""}">${size}</li>
+// 		`;
+// 	});
+// }
+
+function prepareImagesList(images){
+	let imagesList = "";
+	images.forEach(function(img){
+		imagesList += `
+			<li class="rounded-2 mainBorder"><img src="images/products/${img}" alt="products" class="img-fluid"></li>
+		`;
+	});
+	return imagesList;
+}
+
+// function updateCurrentColor(currentColor){
+// 	localStorage.setItem('currentMainColor',currentColor);
+// }
+
+// function updateCurrentImgLogo(currentHref){
+// 	localStorage.setItem('currentImgLogoHref',currentHref);
+// }
+
+// function updateCurrentNavImg(imgSrc){
+// 	localStorage.setItem('currentNavImg',imgSrc);
+// }
+
+// function updateCurrentsectionImg(imgSrc){
+// 	localStorage.setItem('currentsectionImg',imgSrc);
+// }
