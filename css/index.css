@@ -259,15 +259,6 @@ header #SC-Carousel .SC-Carousel-inner .SC-Carousel-item.active .row .part2 img:
 	color: #777;
 }
 
-#Latest ul .mainButton{
-    color: #777;
-}
-
-#Latest ul .mainButton.active,
-#Latest ul .mainButton:hover{
-    color: #fff;
-}
-
 #Featured .content .item {
 	background-color: #fff;
 	border-radius: 10px;
@@ -358,15 +349,44 @@ header #SC-Carousel .SC-Carousel-inner .SC-Carousel-item.active .row .part2 img:
 	background-color: var(--main-color);
 }
 
-footer{
-	background-color: #333;
+.popup[data-popup-name="login"] .popup-box{
+	 width: 400px;
 }
 
-footer p{
-	padding-block: 8px;
+.popup[data-popup-name="login"] .popup-box h3,
+.popup .popup-box i{
+	color: var(--main-color);
 }
 
-footer span{
-	font-family: 'Agency FB', sans-serif;
-	letter-spacing: 1.5px;
+.popup form{
+	padding: 20px;
+	background: #ada996;
+    background: -webkit-linear-gradient(to right,#eaeaea,#dbdbdb,#f2f2f2,#ada996);
+    background: linear-gradient(to right, #eaeaea, #dbdbdb, #f2f2f2, #ada996);
 }
+
+.popup .form-control:focus{
+	box-shadow: none;
+}
+
+.popup[data-popup-name="shop"] .popup-box,
+.popup[data-popup-name="product"] .popup-box{
+	 width: 55%;
+	 border-radius: 10px;
+}
+
+.popup[data-popup-name="product"] .popup-box ul li img{
+	transform: scale(0.9);
+}
+.popup[data-popup-name="product"] .popup-box{
+	padding: 20px;
+}
+
+.popup[data-popup-name="shop"] .popup-box{
+	 margin: 20px auto;
+}
+
+.popup[data-popup-name="shop"].active{
+    display: block;
+}
+

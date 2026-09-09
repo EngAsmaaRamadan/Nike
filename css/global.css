@@ -73,11 +73,20 @@ section{
     transform: scale(1.2);
 }
 
-.product .value{
+.value{
     font-size: 14px;
 }
 
-.product .info ul li{
+ul .mainButton{
+    color: #777;
+}
+
+ul .mainButton.active,
+ul .mainButton:hover{
+    color: #fff;
+}
+
+.info ul li{
     width: 25px;
     height: 25px;
     display: flex;
@@ -105,4 +114,66 @@ section{
 
 .mainBorder{
     border:1px solid var(--main-color);
+}
+
+.popup{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    opacity: 0;
+    justify-content: center;
+    align-items: center;
+    transition-duration: 1s;
+    display: none;
+}
+
+.popup[data-popup-name="product"]{
+    /*display: flex;
+    opacity: 1;*/
+}
+
+.popup .popup-box{
+    transform: translateY(-170%);
+    transition-duration: 0.5s;
+    position: relative;
+    background: #ada996;
+    background: -webkit-linear-gradient(to right,#eaeaea,#dbdbdb,#f2f2f2,#ada996);
+    background: linear-gradient(to right, #eaeaea, #dbdbdb, #f2f2f2, #ada996);
+}
+
+.popup .popup-box i{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.popup.active{
+    display: flex;
+}
+
+.popup.show{
+    opacity: 1;
+}
+
+.popup.show .popup-box{
+    transform: translateY(0%);
+}
+
+footer{
+    background-color: #333;
+}
+
+footer p{
+    padding-block: 8px;
+}
+
+footer span{
+    font-family: 'Agency FB', sans-serif;
+    letter-spacing: 1.5px;
 }

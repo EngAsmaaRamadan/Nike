@@ -101,6 +101,22 @@ function prepareIndicators(imagesList){
 	return liElements;
 }
 
+function openPopup(popupName){
+	let popup = document.querySelector(`.popup[data-popup-name="${popupName}"]`);
+	popup.classList.add('active');
+	setTimeout(function(){
+		popup.classList.add('show');
+	},1);
+}
+
+function closePopup(){
+	let popup = document.querySelector(`.popup.active`);
+	popup.classList.remove('show');
+	setTimeout(function(){
+		popup.classList.remove('active');
+	},500);
+}
+
 // function updateCurrentColor(currentColor){
 // 	localStorage.setItem('currentMainColor',currentColor);
 // }

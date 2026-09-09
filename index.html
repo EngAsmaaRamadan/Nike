@@ -40,8 +40,8 @@
 	      </ul>
 	      <ul class="list-unstyled icons column-gap-3 mb-0">
 	      	<li><i class="fa-solid fa-heart"></i></li>
-	      	<li><i class="fa-solid fa-cart-shopping"></i></li>
-	      	<li><i class="fa-solid fa-user"></i></li>
+	      	<li><i class="fa-solid fa-cart-shopping" onclick="openPopup('shop');"></i></li>
+	      	<li><i class="fa-solid fa-user" onclick="openPopup('login');"></i></li>
 	      </ul>
 	    </div>
 	  </div>
@@ -161,6 +161,91 @@
 				</div>
 		</div>
 	</section>
+
+	<div class="popup text-center" data-popup-name="login" onclick="closePopup();">
+		<div class="popup-box">
+			<form action="" class="rounded-3">
+				<div class="head mb-5">
+				<i class="far fa-times-circle" onclick="closePopup();"></i>
+				<h3>Login</h3>
+				</div>
+				<div class="body">
+				<input type="text" name="username" class="form-control mb-3" placeholder="UserName *" required>
+				<input type="password" name="password" class="form-control mb-3" placeholder="Password *" required>
+				<button class="btn btn-success w-100">Login</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div class="popup text-center" data-popup-name="shop" onclick="closePopup();">
+		<div class="popup-box">
+			<div class="head py-4">
+				<i class="far fa-times-circle" onclick="closePopup();"></i>
+				<h3 class="mainColor">Shop</h3>
+			</div>
+			<div class="body">
+			</div>
+		</div>
+	</div>
+
+	<div class="popup active show" data-popup-name="product" onclick="closePopup();">
+		<div class="popup-box p-3">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="item">
+						<div class="head">
+							<img src="images/products/1-1.png" alt="" class="img-fluid selectedImg">
+						</div>
+						<div class="body">
+							<ul class="list-unstyled d-flex column-gap-3">
+								<li class="rounded-2"><img src="images/products/1-1.png" alt="products" class="img-fluid"></li>
+								<li class="rounded-2"><img src="images/products/1-2.png" alt="products" class="img-fluid"></li>
+								<li class="rounded-2"><img src="images/products/1-3.png" alt="products" class="img-fluid"></li>
+								<li class="rounded-2"><img src="images/products/1-4.png" alt="products" class="img-fluid"></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="item">
+						<h3 class="mb-3">Basketball Shoes</h3>
+						<p class="value mb-0">
+							<span class="text-decoration-line-through mainColor">179.99 <sup>$</sup></span> <span class="fw-semibold">151.19 <sup>$</sup></span>
+					</p>
+					<hr>
+					<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consectetur, aspernatur. Eveniet, fugiat recusandae voluptatum odio placeat aperiam impedit architecto quod modi, possimus qui doloremque, vel aut! Eius totam sed numquam.</p>
+
+					<div class="info d-flex mt-3">
+							<h6 class="size fw-bolder mb-0 me-3">Size :</h6>
+							<ul class="list-unstyled d-flex column-gap-2">
+								
+			<li class="mainBorder rounded-2 mainButton active">S</li>
+		
+			<li class="mainBorder rounded-2 mainButton ">M</li>
+		
+							</ul>
+
+						</div>
+
+						<div class="info d-flex">
+							<h6 class="color fw-bolder mb-0 me-3">Color  :</h6>
+							<ul class="list-unstyled d-flex column-gap-2">
+								
+			<li class="mainBorder rounded-circle mainButton active"></li>
+		
+			<li class="mainBorder rounded-circle mainButton "></li>
+		
+							</ul>
+
+						</div>
+
+							<button class="btn mainColor mainButton">Add To Cart</button>						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<footer class="text-light text-center">
 		<p class="mb-0">&copy; 2021 <span>SemiCode</span>, Ltd. | All Rights Reserved .</p>

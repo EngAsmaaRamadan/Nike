@@ -12,7 +12,7 @@ let scCarousel = document.querySelector("#SC-Carousel"),
 	latestContent = document.querySelector('#Latest .content'),
 	featuredContentRow = document.querySelector('#Featured .content .row'),
 	html = document.querySelector('html'),
-	newSrc;
+	popupBoxes = document.querySelectorAll('.popup .popup-box');
 
 //check scroll to remove opacity from nav when page loaded
 checkScrollNav();
@@ -177,4 +177,10 @@ features.forEach(function(product){
 		</div>
 	</div>
 	`;
+});
+
+popupBoxes.forEach(function(popupBox){
+	popupBox.addEventListener('click',function(e){
+	e.stopPropagation();
+	});
 });
