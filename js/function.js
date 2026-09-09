@@ -234,6 +234,54 @@ function toggleBtn(that,status){
 	}
 }
 
+function showProducts(){
+	let productsContent = document.querySelector('.popup[data-popup-name="shop"] .row');
+	productsContent.innerHTML = '';
+	cartProducts.forEach(function(cartProduct){
+		let product = getProduct(cartProduct.id);
+		productsContent.innerHTML += `
+			<div class="col-lg-4">
+				<div class="item text-start">
+					<div class="product">
+						<img src="images/products/${product.images[0]}" alt="products shop" class="img-fluid">
+						<h4>${product.name}</h4>
+						
+						<div class="info d-flex mb-2">
+							<h6 class="price fw-bolder mb-0 me-3">Price :</h6>
+							${preparePrices(product.price,product.discount)}
+						</div>
+
+						<div class="info d-flex mt-3">
+							<h6 class="size fw-bolder mb-0 me-3">Size :</h6>
+							<ul class="list-unstyled d-flex column-gap-2">
+								${prepareSizeList([cartProduct.size])}
+							</ul>
+						</div>
+						<div class="info d-flex">
+							<h6 class="color fw-bolder mb-0 me-3">Color  :</h6>
+							<ul class="list-unstyled d-flex column-gap-2 mb-2 color">
+								${prepareColorList([cartProduct.color])}
+							</ul>
+
+						</div>
+						<button class="btn btn-danger w-100 mt-3" onclick="removeFromCartInPopup(this,${product.id});">Remove</button>
+					</div>
+				</div>
+			</div>
+		`;
+		console.log(productsContent);
+	});
+	console.log(productsContent);
+	openPopup('shop');
+}
+
+function removeFromCartInPopup(that,productId){
+	cartProducts = cartProducts.filter( (cartProduct) => cartProduct.id != productId);
+	updateordersInLocalStorage();
+	that.closest('.col-lg-4').remove();
+
+}
+
 function openPopup(popupName){
 	let popup = document.querySelector(`.popup[data-popup-name="${popupName}"]`);
 	popup.classList.add('active');

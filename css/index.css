@@ -386,6 +386,12 @@ header #SC-Carousel .SC-Carousel-inner .SC-Carousel-item.active .row .part2 img:
 	 margin: 20px auto;
 }
 
+.popup[data-popup-name="shop"] .popup-box .item{
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 10px;
+}
+
 .popup[data-popup-name="shop"].active{
     display: block;
 }
