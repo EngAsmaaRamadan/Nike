@@ -178,5 +178,3 @@ features.forEach(function(product){
 	</div>
 	`;
 });
-
-let indicators

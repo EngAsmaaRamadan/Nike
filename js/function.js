@@ -67,7 +67,6 @@ function prepareSizeList(sizesList){
 function prepareImagesList(imagesList){
 	let liElements = "";
 	imagesList.forEach(function(image){
-		console.log(image);
 		liElements += `
 			<li class="rounded-2 mainBorder"><img src="images/products/${image}" onclick="changeSelectedImg(this,'${image}');" alt="products" class="img-fluid"></li>
 		`;

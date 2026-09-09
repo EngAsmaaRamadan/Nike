@@ -1,0 +1,64 @@
+@media (max-width: 1300px) {
+    nav.navbar .navbar-brand {
+	    width: 25%;
+	}
+
+    .title img {
+	    width: 130px;
+	}
+
+	#Latest .product{
+		width: 280px;
+    	margin: auto;
+	}
+
+	#Latest .product h3{
+		font-size: 17px;
+	}
+
+	#Featured .content .item {
+	    width: 280px;
+	    margin: auto;
+	}
+
+	#Featured .product .discount{
+		font-size: 13px;
+    	transform: rotate(45deg) translate(-3%, 0px);
+	}
+
+	#Featured .content .item .head i{
+		bottom: 5%;
+	}
+
+	#Featured .content .item:hover .head i {
+	    transform: translate(-50%, 0px);
+	}
+
+	#Featured .content .item .head ul.indicators{
+		bottom: -20%;
+	}
+
+	footer p {
+	    padding-block: 7px;
+	}
+}
+
+@media (min-width: 371px) and (max-width: 1300px) {
+    
+}
+
+@media (min-width: 577px) and (max-width: 1300px) {
+    
+}
+
+@media (min-width: 769px) and (max-width: 1300px) {
+    
+}
+
+@media (min-width: 992px) and (max-width: 1300px) {
+    
+}
+
+@media (min-width: 1181px) and (max-width: 1300px) {
+    
+}
