@@ -59,7 +59,7 @@ function prepareSizeList(sizesList){
 	let liElements = "";
 	sizesList.forEach(function(size,index){
 		liElements += `
-			<li class="mainBorder rounded-2 mainButton ${(index == 0)? 'active' : ''}">${size}</li>
+			<li class="mainBorder rounded-2 mainButton ${(index == 0)? 'active' : ''}" onclick="changeActive(this);">${size}</li>
 		`;
 	});
 	return liElements;
@@ -75,7 +75,7 @@ function prepareImagesList(imagesList){
 	return liElements;
 }
 
-function changeSelectedImg(that,imageName,isIndicator = false){
+function changeSelectedImg(that,imageName){
 	let productDiv = that.closest('.product'),
 		selectedImg = productDiv.querySelector('.selectedImg'),
 		selectedImgSrc = selectedImg.src,
@@ -83,18 +83,19 @@ function changeSelectedImg(that,imageName,isIndicator = false){
 	selectedImgSrcArr[selectedImgSrcArr.length - 1] = imageName;
 	selectedImgNewSrc = selectedImgSrcArr.join('/');
 	selectedImg.src = selectedImgNewSrc
-	if(isIndicator){
-		let currentActiveIndicator = that.parentElement.querySelector('.active');
-		currentActiveIndicator.classList.remove('active');
-		that.classList.add('active');
-	}
+}
+
+function changeActive(that){
+	let currentActiveIndicator = that.parentElement.querySelector('.active');
+	currentActiveIndicator.classList.remove('active');
+	that.classList.add('active');
 }
 
 function prepareIndicators(imagesList){
 	let liElements = "";
 	imagesList.forEach(function(image,index){
 		liElements += `
-			<li class="mainBorder ${(index == 0)? 'active' : ''}" onclick="changeSelectedImg(this,'${image}',true);"></li>
+			<li class="mainButton ${(index == 0)? 'active' : ''}" onclick="changeSelectedImg(this,'${image}');changeActive(this);"></li>
 		`;
 	});
 	return liElements;
