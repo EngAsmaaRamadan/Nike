@@ -106,6 +106,16 @@ ul .mainButton:hover{
     transition-duration: 0.5s;
 }
 
+.mainButton.remove{
+    border: 1px solid var(--bs-warning);
+    color: var(--bs-warning);
+}
+
+.mainButton.remove:hover{
+    background-color: var(--bs-warning);
+    color: #fff;
+}
+
 .mainButton:hover,
 .mainButton.active{
     background-color: var(--main-color);

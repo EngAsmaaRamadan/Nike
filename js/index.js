@@ -12,10 +12,17 @@ let scCarousel = document.querySelector("#SC-Carousel"),
 	latestContent = document.querySelector('#Latest .content'),
 	featuredContentRow = document.querySelector('#Featured .content .row'),
 	html = document.querySelector('html'),
-	popupBoxes = document.querySelectorAll('.popup .popup-box');
+	popupBoxes = document.querySelectorAll('.popup .popup-box'),
+	cartProducts = [];
 
 //check scroll to remove opacity from nav when page loaded
 checkScrollNav();
+
+if(localStorage.getItem('cartProducts') == null){
+	updateordersInLocalStorage();
+}else{
+	cartProducts = JSON.parse(localStorage.getItem('cartProducts'));
+}
 
 // if(localStorage.getItem('currentMainColor') != null ){
 // 	html.style.setProperty('--main-color',localStorage.getItem('currentMainColor'));
@@ -108,10 +115,11 @@ window.addEventListener('DOMContentLoaded',function(){
 		loadingPage.classList.add('d-none');
 	},1000);
 });
-/*prepareImagesList*/
+
 latest.forEach(function(product){
+	let isProductIntoCart = checkIfProductIntoCart(product.id);
 	latestContent.innerHTML += `
-		<div class="product mainBorder rounded-3 pt-3 px-3 mb-3">
+		<div class="product mainBorder rounded-3 pt-3 px-3 mb-3" data-selected-color="${isProductIntoCart?.color ?? product.colors[0]}" data-selected-size="${isProductIntoCart?.size ?? product.sizes[0]}">
 			<div class="row">
 				<div class="col-lg-6 part1">
 					<div class="item">
@@ -144,10 +152,17 @@ latest.forEach(function(product){
 						<div class="info d-flex mt-3">
 							<h6 class="size fw-bolder mb-0 me-3">Size :</h6>
 							<ul class="list-unstyled d-flex column-gap-2">
-								${prepareSizeList(product.sizes)}
+								${prepareSizeList(product.sizes,isProductIntoCart)}
 							</ul>
 						</div>
-						<button class="btn mainColor mainButton">Add To Cart</button>
+						
+						${
+						(isProductIntoCart == null)? 
+						`<button class="btn mainColor mainButton" onclick="addToCart(this,${product.id});toggleBtn(this,'remove');">Add To Cart</button>`
+						:
+						`<button class="btn mainColor mainButton remove" onclick="removeFromCart(this,${product.id});toggleBtn(this,'add');">Remove From Cart</button>`
+						}
+
 					</div>
 				</div>
 			</div>
@@ -163,7 +178,7 @@ features.forEach(function(product){
 					<p class="discount text-center ${(product.discount == 0) ? 'd-none': ''}">-${product.discount * 100}%</p>
 					<div class="head mb-5">
 						<img src="images/products/${product.images[0]}" class="img-fluid selectedImg" alt="shoes image">
-						<i class="fa-solid fa-magnifying-glass search rounded-circle"></i>
+						<i class="fa-solid fa-magnifying-glass search rounded-circle"onclick="showProduct(${product.id});"></i>
 						<ul class="list-unstyled indicators d-flex column-gap-2">
 							${prepareIndicators(product.images)}
 						</ul>
