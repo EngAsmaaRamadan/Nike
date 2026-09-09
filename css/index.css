@@ -321,7 +321,6 @@ header #SC-Carousel .SC-Carousel-inner .SC-Carousel-item.active .row .part2 img:
 }
 
 #Featured .content .item:hover .head i{
-	transform: translate(-50%, 0px);
 	opacity: 1;
 	transition-delay: 0.5s;
 }
