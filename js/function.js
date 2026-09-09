@@ -47,9 +47,10 @@ function updateNavItem(sectionId){
 }
 
 function preparePrices(price,discount){
+	let newPrice = price * (1 - discount);
 	return `
 		<p class="value mb-0">
-			<span class="text-decoration-line-through mainColor ${(discount == 0) ? 'd-none' : '' }">${price} <sup>$</sup></span> <span class="fw-semibold">${(price * (1 - discount)).toFixed(2)} <sup>$</sup></span>
+			<span class="text-decoration-line-through mainColor ${(discount == 0) ? 'd-none' : '' }">${price} <sup>$</sup></span> <span class="fw-semibold">${ (Number.isInteger(newPrice) ) ? (newPrice) : newPrice.toFixed(2) } <sup>$</sup></span>
 		</p>
 	`;
 }
