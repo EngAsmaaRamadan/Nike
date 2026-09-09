@@ -390,3 +390,11 @@ header #SC-Carousel .SC-Carousel-inner .SC-Carousel-item.active .row .part2 img:
     display: block;
 }
 
+ul.color li{
+	width: 15px;
+	height: 15px;
+}
+
+ul.color li.active{
+	box-shadow: #00000040 0 54px 55px, #0000001f 0 -12px 30px, #0000001f 0 4px 6px, #0000002b 0 12px 13px, #00000017 0 -3px 5px;
+}
