@@ -49,7 +49,7 @@ function updateNavItem(sectionId){
 function preparePrices(price,discount){
 	return `
 		<p class="value mb-0">
-			<span class="text-decoration-line-through mainColor ${(discount == 0) ? 'd-none' : '' }">${price} <sup>$</sup></span> <span class="fw-semibold">${price * (1 - discount)} <sup>$</sup></span>
+			<span class="text-decoration-line-through mainColor ${(discount == 0) ? 'd-none' : '' }">${price} <sup>$</sup></span> <span class="fw-semibold">${(price * (1 - discount)).toFixed(2)} <sup>$</sup></span>
 		</p>
 	`;
 }
@@ -67,8 +67,34 @@ function prepareSizeList(sizesList){
 function prepareImagesList(imagesList){
 	let liElements = "";
 	imagesList.forEach(function(image){
+		console.log(image);
 		liElements += `
-			<li class="rounded-2 mainBorder"><img src="images/products/${image}" alt="products" class="img-fluid"></li>
+			<li class="rounded-2 mainBorder"><img src="images/products/${image}" onclick="changeSelectedImg(this,'${image}');" alt="products" class="img-fluid"></li>
+		`;
+	});
+	return liElements;
+}
+
+function changeSelectedImg(that,imageName,isIndicator = false){
+	let productDiv = that.closest('.product'),
+		selectedImg = productDiv.querySelector('.selectedImg'),
+		selectedImgSrc = selectedImg.src,
+		selectedImgSrcArr = selectedImgSrc.split('/');
+	selectedImgSrcArr[selectedImgSrcArr.length - 1] = imageName;
+	selectedImgNewSrc = selectedImgSrcArr.join('/');
+	selectedImg.src = selectedImgNewSrc
+	if(isIndicator){
+		let currentActiveIndicator = that.parentElement.querySelector('.active');
+		currentActiveIndicator.classList.remove('active');
+		that.classList.add('active');
+	}
+}
+
+function prepareIndicators(imagesList){
+	let liElements = "";
+	imagesList.forEach(function(image,index){
+		liElements += `
+			<li class="mainBorder ${(index == 0)? 'active' : ''}" onclick="changeSelectedImg(this,'${image}',true);"></li>
 		`;
 	});
 	return liElements;

@@ -271,7 +271,22 @@ header #SC-Carousel .SC-Carousel-inner .SC-Carousel-item.active .row .part2 img:
 #Featured .content .item {
 	background-color: #fff;
 	border-radius: 10px;
-	padding: 20px;
+	padding: 25px 20px;
+	overflow: hidden;
+}
+
+#Featured .product {
+	position: relative;
+}
+
+#Featured .product .discount{
+	background-color: var(--main-color);
+	position: absolute;
+	color: #fff;
+	font-size: 12px;
+    width: 100%;
+    transform: rotate(45deg) translate(-4%, 0px);
+    right: -48%;
 }
 
 #Featured .content .item .head{
@@ -281,7 +296,6 @@ header #SC-Carousel .SC-Carousel-inner .SC-Carousel-item.active .row .part2 img:
 #Featured .content .item .head img{
 	transform: scale(1);
 	transition-duration: 0.5s;
-	cursor: pointer;
 }
 
 #Featured .content .item:hover .head img{
@@ -335,7 +349,10 @@ header #SC-Carousel .SC-Carousel-inner .SC-Carousel-item.active .row .part2 img:
 #Featured .content .item .head ul.indicators li{
 	width: 15px;
 	height: 15px;
+	cursor: pointer;
 	transition-duration: 0.5s;
+	border-radius: 50%;
+	background-color: #fff;
 }
 
 #Featured .content .item .head ul.indicators li.active{

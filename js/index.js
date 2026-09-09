@@ -10,6 +10,7 @@ let scCarousel = document.querySelector("#SC-Carousel"),
 	sections = document.querySelectorAll('section, header'),
 	loadingPage = document.querySelector('.loading-page'),
 	latestContent = document.querySelector('#Latest .content'),
+	featuredContentRow = document.querySelector('#Featured .content .row'),
 	html = document.querySelector('html'),
 	newSrc;
 
@@ -124,8 +125,8 @@ latest.forEach(function(product){
 							</div>
 							<div class="col-lg-10">
 								<div class="item h-100">
-									<div class="selectedImg h-100">
-										<img src="images/products/${product.images[0]}" alt="products">
+									<div class="h-100 selectedImgDiv">
+										<img src="images/products/${product.images[0]}" class="selectedImg" alt="products">
 									</div>
 								</div>
 							</div>
@@ -154,3 +155,28 @@ latest.forEach(function(product){
 	`;
 });
 
+features.forEach(function(product){
+	featuredContentRow.innerHTML += `
+		<div class="col-lg-3">
+			<div class="item">
+				<div class="product">
+					<p class="discount text-center ${(product.discount == 0) ? 'd-none': ''}">-${product.discount * 100}%</p>
+					<div class="head mb-5">
+						<img src="images/products/${product.images[0]}" class="img-fluid selectedImg" alt="shoes image">
+						<i class="fa-solid fa-magnifying-glass search rounded-circle"></i>
+						<ul class="list-unstyled indicators d-flex column-gap-2">
+							${prepareIndicators(product.images)}
+						</ul>
+					</div>
+					<div class="body text-center">
+						<h6 class="fw-light">${product.name}</h6>
+						${preparePrices(product.price,product.discount)}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	`;
+});
+
+let indicators

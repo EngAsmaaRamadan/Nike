@@ -55,20 +55,20 @@ section{
     width: 200px;
 }
 
-.product .selectedImg {
+.product .selectedImgDiv {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.product .selectedImg img{
+.product .selectedImgDiv img{
     width: 60%;
     transition-duration: 0.5s;
     transform: scale(1.0);
     cursor: pointer;
 }
 
-.product .selectedImg img:hover{
+.product .selectedImgDiv img:hover{
     transform: scale(1.2);
 }
 
