@@ -76,6 +76,10 @@ nav.navbar .nav-item.active a{
 	color: var(--main-color);
 }
 
+nav input.form-control{
+	width: 200px;
+}
+
 nav.navbar ul.icons{
 	display: flex;
 }
