@@ -35,6 +35,10 @@
 		height: 320px;
 	}
 
+	nav.navbar .navbar-toggler{
+		display: flex;
+	}
+
 	nav .sc-collapse.show{
 		opacity: 1;
 		height: initial;
