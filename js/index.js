@@ -153,7 +153,7 @@ latest.forEach(function(product){
 						</div>
 						<div class="info d-flex mt-3">
 							<h6 class="size fw-bolder mb-0 me-3">Size :</h6>
-							<ul class="list-unstyled d-flex column-gap-2">
+							<ul class="list-unstyled d-flex column-gap-2 size">
 								${prepareSizeList(product.sizes,isProductIntoCart)}
 							</ul>
 						</div>

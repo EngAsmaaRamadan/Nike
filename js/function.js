@@ -103,10 +103,26 @@ function changeSelectedImg(that,imageName){
 	selectedImg.src = selectedImgNewSrc
 }
 
-function changeActive(that){
-	let currentActiveIndicator = that.parentElement.querySelector('.active');
-	currentActiveIndicator.classList.remove('active');
-	that.classList.add('active');
+function changeActive(that,productId = 0){
+	if(productId == 0){
+		let currentActiveIndicator = that.parentElement.querySelector('.active');
+			currentActiveIndicator.classList.remove('active');
+			that.classList.add('active');	
+	}else{
+		let product = document.querySelector(`.product[data-product-id="${productId}"]`),
+			productOriginalData = getProduct(productId);;
+		product.setAttribute('data-selected-size',productOriginalData.sizes[0]);
+		product.setAttribute('data-selected-color',productOriginalData.colors[0]);
+		let currentActiveIndicators = product.querySelectorAll('li.active');
+			currentActiveIndicators.forEach(function(currentIndicator){
+				currentIndicator.classList.remove('active');
+			});
+		let defaultIndicators = product.querySelectorAll('ul.size li:first-child, ul.color li:first-child');
+		defaultIndicators.forEach(function(defaultIndicator){
+			defaultIndicator.classList.add('active');
+		});
+	}
+	
 }
 
 function prepareIndicators(imagesList){
@@ -124,7 +140,7 @@ function showProduct(productId){
 		popupProductContent = document.querySelector('.popup[data-popup-name="product"] .popup-box'),
 		currentProduct = getProduct(productId);
 	popupProductContent.innerHTML = `
-		<div class="product" data-selected-color="${isProductIntoCart?.color ?? currentProduct.colors[0]}" data-selected-size="${isProductIntoCart?.size ?? currentProduct.sizes[0]}">
+		<div class="product" data-product-id="${productId}" data-selected-color="${isProductIntoCart?.color ?? currentProduct.colors[0]}" data-selected-size="${isProductIntoCart?.size ?? currentProduct.sizes[0]}">
 			<div class="row">
 				<div class="col-lg-6">
 			<div class="item">
@@ -147,7 +163,7 @@ function showProduct(productId){
 
 				<div class="info d-flex mt-3">
 					<h6 class="size fw-bolder mb-0 me-3">Size :</h6>
-					<ul class="list-unstyled d-flex column-gap-2">
+					<ul class="list-unstyled d-flex column-gap-2 size">
 						${prepareSizeList(currentProduct.sizes,isProductIntoCart)}
 					</ul>
 				</div>
@@ -220,10 +236,10 @@ function addToCart(that,productId){
 function removeFromCart(that,productId){
 	cartProducts = cartProducts.filter( (cartProduct) => cartProduct.id != productId);
 	updateordersInLocalStorage();
-	//let product = ;
 	if(that != null){
 		toggleBtn(that,'add');
-		that.setAttribute('onclick',`addToCart(this,${productId})`);	
+		that.setAttribute('onclick',`addToCart(this,${productId})`);
+		changeActive(that,productId);
 	}
 }
 
@@ -237,7 +253,7 @@ function toggleBtn(that,status){
 	}
 }
 
-function showProducts(){
+function showProductsInPopupShop(){
 	let productsContent = document.querySelector('.popup[data-popup-name="shop"] .row');
 	if(cartProducts.length == 0){
 		alert.classList.remove('d-none');
@@ -262,7 +278,7 @@ function showProducts(){
 
 						<div class="info d-flex mt-3">
 							<h6 class="size fw-bolder mb-0 me-3">Size :</h6>
-							<ul class="list-unstyled d-flex column-gap-2">
+							<ul class="list-unstyled d-flex column-gap-2 size">
 								${prepareSizeList([cartProduct.size])}
 							</ul>
 						</div>
