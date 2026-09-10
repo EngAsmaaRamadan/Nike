@@ -220,6 +220,7 @@ function addToCart(that,productId){
 function removeFromCart(that,productId){
 	cartProducts = cartProducts.filter( (cartProduct) => cartProduct.id != productId);
 	updateordersInLocalStorage();
+	//let product = ;
 	if(that != null){
 		toggleBtn(that,'add');
 		that.setAttribute('onclick',`addToCart(this,${productId})`);	
