@@ -384,6 +384,7 @@ header #SC-Carousel .SC-Carousel-inner .SC-Carousel-item.active .row .part2 img:
 
 .popup[data-popup-name="shop"] .popup-box{
 	 margin: 20px auto;
+	 padding: 10px;
 }
 
 .popup[data-popup-name="shop"] .popup-box .item{
@@ -396,11 +397,39 @@ header #SC-Carousel .SC-Carousel-inner .SC-Carousel-item.active .row .part2 img:
     display: block;
 }
 
+.popup[data-popup-name="shop"]{
+    overflow-y: auto;
+}
+
+.popup[data-popup-name="shop"] h4{
+	font-size: 20px;
+}
+
 ul.color li{
 	width: 15px;
 	height: 15px;
 }
 
-ul.color li.active{
+ul.color li.color{
+	border: 1px solid var(--main-color);
+	box-shadow: none;
+	color: #fff;
+	transition-duration: 0.5s;
+}
+
+ul.color li.color.active{
+	border:none;
 	box-shadow: #00000040 0 54px 55px, #0000001f 0 -12px 30px, #0000001f 0 4px 6px, #0000002b 0 12px 13px, #00000017 0 -3px 5px;
+}
+
+.popup button.btn.buy{
+	border:1px solid var(--green-color);
+	color: var(--green-color);
+	transition-duration: 0.5s;
+}
+
+.popup button.btn.buy:hover{
+	color: #fff;
+	border-color: transparent;
+	background-color: var(--green-color);
 }

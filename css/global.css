@@ -3,6 +3,7 @@
     --first-color:#fb2527;
     --second-color:#0f7ad7;
     --third-color:#ed9721;
+    --green-color:#198754;
 }
 
 body{
@@ -139,11 +140,6 @@ ul .mainButton:hover{
     align-items: center;
     transition-duration: 1s;
     display: none;
-}
-
-.popup[data-popup-name="product"]{
-    /*display: flex;
-    opacity: 1;*/
 }
 
 .popup .popup-box{

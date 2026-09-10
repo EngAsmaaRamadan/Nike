@@ -54,7 +54,7 @@ function preparePrices(price,discount){
 	`;
 }
 
-function prepareSizeList(sizesList,isProductIntoCart){
+function prepareSizeList(sizesList,isProductIntoCart = null){
 	let liElements = "";
 	if(isProductIntoCart == null){
 		sizesList.forEach(function(size,index){
@@ -179,18 +179,18 @@ function checkIfProductIntoCart(productId){
 	return (result.length != 0) ? result[0] : null ;
 }
 
-function prepareColorList(colorList,isProductIntoCart){
+function prepareColorList(colorList,isProductIntoCart = null){
 	let liElements = "";
 	if(isProductIntoCart == null){
 		colorList.forEach(function(color,index){
 		liElements += `
-			<li class=" rounded-circle ${(index == 0)? 'active' : 'mainBorder'}" onclick="changeActive(this);updateSelectedColor(this,'${color}');"style="background-color: ${color};"></li>
+			<li class=" rounded-circle color ${(index == 0)? 'active' : ''}" onclick="changeActive(this);updateSelectedColor(this,'${color}');"style="background-color: ${color};"></li>
 		`;
 		});	
 	}else{
 		colorList.forEach(function(color){
 		liElements += `
-			<li class=" rounded-circle ${(color == isProductIntoCart.color)? 'active' : 'mainBorder'}" onclick="changeActive(this);updateSelectedColor(this,'${color}');"style="background-color: ${color};"></li>
+			<li class=" rounded-circle color ${(color == isProductIntoCart.color)? 'active' : ''}" onclick="changeActive(this);updateSelectedColor(this,'${color}');"style="background-color: ${color};"></li>
 		`;
 		});
 	}
@@ -220,8 +220,10 @@ function addToCart(that,productId){
 function removeFromCart(that,productId){
 	cartProducts = cartProducts.filter( (cartProduct) => cartProduct.id != productId);
 	updateordersInLocalStorage();
-	toggleBtn(that,'add');
-	that.setAttribute('onclick',`addToCart(this,${productId})`);
+	if(that != null){
+		toggleBtn(that,'add');
+		that.setAttribute('onclick',`addToCart(this,${productId})`);	
+	}
 }
 
 function toggleBtn(that,status){
@@ -236,7 +238,13 @@ function toggleBtn(that,status){
 
 function showProducts(){
 	let productsContent = document.querySelector('.popup[data-popup-name="shop"] .row');
-	productsContent.innerHTML = '';
+	if(cartProducts.length == 0){
+		alert.classList.remove('d-none');
+		buyButton.classList.add('d-none');
+	}else{
+		alert.classList.add('d-none');
+		buyButton.classList.remove('d-none');
+		productsContent.innerHTML = '';
 	cartProducts.forEach(function(cartProduct){
 		let product = getProduct(cartProduct.id);
 		productsContent.innerHTML += `
@@ -244,7 +252,7 @@ function showProducts(){
 				<div class="item text-start">
 					<div class="product">
 						<img src="images/products/${product.images[0]}" alt="products shop" class="img-fluid">
-						<h4>${product.name}</h4>
+						<h4>${(product.name).slice(0,14)}...</h4>
 						
 						<div class="info d-flex mb-2">
 							<h6 class="price fw-bolder mb-0 me-3">Price :</h6>
@@ -268,18 +276,23 @@ function showProducts(){
 					</div>
 				</div>
 			</div>
+				</div>
 		`;
-		console.log(productsContent);
 	});
-	console.log(productsContent);
+		
+	}
+	
 	openPopup('shop');
 }
 
 function removeFromCartInPopup(that,productId){
-	cartProducts = cartProducts.filter( (cartProduct) => cartProduct.id != productId);
-	updateordersInLocalStorage();
-	that.closest('.col-lg-4').remove();
-
+	let btnOfLatestCurrentProduct = document.querySelector(`#Latest .product[data-product-id='${productId}'] button`);
+	removeFromCart(btnOfLatestCurrentProduct,productId);
+	that.parentElement.parentElement.parentElement.remove();
+	if(cartProducts.length == 0){
+		alert.classList.remove('d-none');
+		buyButton.classList.add('d-none');
+	}
 }
 
 function openPopup(popupName){

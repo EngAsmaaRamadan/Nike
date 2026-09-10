@@ -13,6 +13,8 @@ let scCarousel = document.querySelector("#SC-Carousel"),
 	featuredContentRow = document.querySelector('#Featured .content .row'),
 	html = document.querySelector('html'),
 	popupBoxes = document.querySelectorAll('.popup .popup-box'),
+	alert = document.querySelector('.popup[data-popup-name="shop"] .body .alert'),
+	buyButton = document.querySelector('.popup[data-popup-name="shop"] .body .buy'),
 	cartProducts = [];
 
 //check scroll to remove opacity from nav when page loaded
@@ -119,7 +121,7 @@ window.addEventListener('DOMContentLoaded',function(){
 latest.forEach(function(product){
 	let isProductIntoCart = checkIfProductIntoCart(product.id);
 	latestContent.innerHTML += `
-		<div class="product mainBorder rounded-3 pt-3 px-3 mb-3" data-selected-color="${isProductIntoCart?.color ?? product.colors[0]}" data-selected-size="${isProductIntoCart?.size ?? product.sizes[0]}">
+		<div class="product mainBorder rounded-3 pt-3 px-3 mb-3" data-selected-color="${isProductIntoCart?.color ?? product.colors[0]}" data-selected-size="${isProductIntoCart?.size ?? product.sizes[0]}" data-product-id="${product.id}">
 			<div class="row">
 				<div class="col-lg-6 part1">
 					<div class="item">
