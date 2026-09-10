@@ -17,15 +17,17 @@
 </head>
 <body>
 
-	<nav class="navbar navbar-expand-lg position-fixed z-3"><!--problem that nav take part of header-->
+	<nav class="navbar navbar-expand-lg position-fixed z-3"><!--problem that nav take part of header done by add pt-->
 	  <div class="container">
-	    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-	      <span class="navbar-toggler-icon"></span>
-	    </button>
-	    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-	    	<a class="navbar-brand" href="#">
+	  	<a class="navbar-brand" href="#">
 	    		<img src="images/first-logo.png" alt="first-logo logo navbar" class="img-fluid" id="Logo">
 	    	</a>
+	    <button class="navbar-toggler mainBorder hide" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	      <span></span>
+	      <span></span>
+	      <span></span>
+	    </button>
+	    <div class="sc-collapse mt-2" id="navbarSupportedContent">
 	      <ul class="navbar-nav mb-2 column-gap-3">
 	        <li class="nav-item active">
 	          <a class="nav-link" aria-current="page" href="#Home">Home</a>
@@ -38,7 +40,7 @@
 	        </li>
 	        </li>
 	      </ul>
-	      		<div class="search-div d-flex">
+	      		<div class="search-div d-flex mb-2 mb-lg-0">
 		        	<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
 		        	<button class="btn search" onclick="search(this);">Search</button>
 		        </div>
@@ -52,8 +54,8 @@
 	  </div>
 	</nav>
 
-	<header id="Home">
-		<div id="SC-Carousel" class="vh-100">
+	<header id="Home" class="pt-5 pt-lg-0">
+		<div id="SC-Carousel" class="vh-100 pt-lg-0">
 			<div class="SC-Carousel-inner h-100">
 				<div class="SC-Carousel-item h-100 active" data-color-name="first" data-index-item="0">
 					<div class="container h-100">
@@ -155,7 +157,7 @@
 		</div>
 	</section>
 
-	<section id="Featured" class="py-5 pt-0 py-lg-5">
+	<section id="Featured" class="py-5 pb-4 pt-0 py-lg-5">
 		<div class="container mb-3">
 			<div class="title text-center mb-4 mb-lg-5">
 				<h2>FEATURE PRODUCTS</h2>
@@ -168,9 +170,9 @@
 	</section>
 
 	<div class="popup text-center" data-popup-name="login" onclick="closePopup();">
-		<div class="popup-box">
+		<div class="popup-box rounded-3">
 			<form action="" class="rounded-3">
-				<div class="head mb-5">
+				<div class="head mb-lg-5 mb-4">
 				<i class="far fa-times-circle" onclick="closePopup();"></i>
 				<h3>Login</h3>
 				</div>
@@ -186,7 +188,7 @@
 	<div class="popup text-center" data-popup-name="shop" onclick="closePopup();">
 		<div class="popup-box pb-3">
 			<div class="container">
-			<div class="head py-4">
+			<div class="head py-4 pt-2 pt-lg-0">
 				<i class="far fa-times-circle" onclick="closePopup();"></i>
 				<h3 class="mainColor">Shop</h3>
 			</div>

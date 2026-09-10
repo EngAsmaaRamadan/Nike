@@ -16,8 +16,28 @@ nav.navbar .navbar-brand{
 	width: 8%;
 }
 
-nav .collapse.navbar-collapse{
-	justify-content: space-between;
+nav.navbar .navbar-toggler{
+	width: 45px;
+	height: 35px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+nav.navbar .navbar-toggler span{
+	display: block;
+	width: 25px;
+	height: 2px;
+	background-color: var(--main-color);
+}
+
+nav .sc-collapse{
+	justify-content: space-around;
+}
+
+button:focus:not(:focus-visible){
+	box-shadow: none;
 }
 
 nav.navbar .nav-link{

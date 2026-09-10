@@ -14,7 +14,9 @@ let scCarousel = document.querySelector("#SC-Carousel"),
 	html = document.querySelector('html'),
 	popupBoxes = document.querySelectorAll('.popup .popup-box'),
 	alert = document.querySelector('.popup[data-popup-name="shop"] .body .alert'),
+	navButton = document.querySelector('.navbar-toggler'),
 	buyButton = document.querySelector('.popup[data-popup-name="shop"] .body .buy'),
+	navUlDiv = document.querySelector('.sc-collapse'),
 	cartProducts = [];
 
 //check scroll to remove opacity from nav when page loaded
@@ -214,4 +216,22 @@ popupBoxes.forEach(function(popupBox){
 	popupBox.addEventListener('click',function(e){
 	e.stopPropagation();
 	});
+});
+
+navButton.addEventListener('click',function(){
+	if(navButton.className.includes('hide')){
+		navUlDiv.classList.add('active');
+		setTimeout(function(){
+			navUlDiv.classList.add('show');
+			navUlDiv.closest('nav.navbar').classList.add('show');
+		},500);
+		navButton.classList.remove('hide');
+	}else{
+		navUlDiv.classList.remove('show');
+		navUlDiv.closest('nav.navbar').classList.remove('show');
+		setTimeout(function(){
+			navUlDiv.classList.remove('active');
+		},500);
+		navButton.classList.add('hide');
+	}
 });

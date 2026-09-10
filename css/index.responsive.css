@@ -3,8 +3,91 @@
 	    width: 25%;
 	}
 
+	nav {
+		height: initial;
+		transition: 0.5s;
+	}
+
+	nav .sc-collapse{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		padding: 0;
+        border-radius: 10px;
+        background: #ada996;
+        display: none;
+        opacity: 0;
+        transition: 0.5s;
+    	background: -webkit-linear-gradient(to right,#eaeaea,#dbdbdb,#f2f2f2,#ada996);
+    	background: linear-gradient(to right, #eaeaea, #dbdbdb, #f2f2f2, #ada996);
+    	height: 0%;
+    	padding: 16px 24px;
+    	margin: auto;
+        width: 100%;
+	}
+
+	nav .sc-collapse.active{
+		display: flex;
+		
+	}
+
+	nav.show{
+		height: 320px;
+	}
+
+	nav .sc-collapse.show{
+		opacity: 1;
+		height: initial;
+	}
+
+	nav ul.navbar-nav{
+		align-items: center;
+	}
+
+	nav.navbar .nav-item{
+		width: fit-content;
+    	padding-inline: 10px;
+	}
+
+	nav.navbar ul.icons {
+	    position: relative;
+	    transform: translate(30%, 10px);
+	}
+
     .title img {
 	    width: 130px;
+	}
+
+	#SC-Carousel{
+		padding-top: 24px;
+	}
+
+	header #SC-Carousel .SC-Carousel-inner .SC-Carousel-item.active .row .part2 img:nth-of-type(1){
+		width: 50%;
+		transform: translate(18%, 15%);
+	}
+
+	header #SC-Carousel > button.prev {
+	    right: 80px;
+	    left: initial;
+	    bottom: 5px;
+	    top: initial;
+	}
+
+	header #SC-Carousel > button.next {
+	    right: 20px;
+	    bottom: 5px;
+	    top: initial;
+	}
+
+	header #SC-Carousel .SC-Carousel-inner .SC-Carousel-item h2{
+		font-size: 30px;
+		margin-block: 15px;
+	}
+
+	header #SC-Carousel .SC-Carousel-inner .SC-Carousel-item.active .row .part2 img:nth-of-type(2){
+		width: 65%;
+		transform: translate(-50%, -54%) rotate(-35deg) scale(1.0);
 	}
 
 	#Latest .product{
@@ -37,10 +120,36 @@
 	footer p {
 	    padding-block: 7px;
 	}
+
+	.popup[data-popup-name="login"] .popup-box{
+		width: 280px;
+	}
+
+	.popup[data-popup-name="product"]{
+		overflow-y: auto;
+	}
+
+	.popup[data-popup-name="shop"] .popup-box{
+		width: 280px;
+	}
+
+	.popup[data-popup-name="product"] .popup-box{
+		display: block;
+        width: 280px;
+        margin: 20px auto;
+	}
 }
 
 @media (min-width: 371px) and (max-width: 1300px) {
-    
+    nav.navbar .navbar-brand {
+        width: 20%;
+    }
+
+    #SC-Carousel{
+		padding-top: 48px;
+	}
+
+	
 }
 
 @media (min-width: 577px) and (max-width: 1300px) {
@@ -52,7 +161,10 @@
 }
 
 @media (min-width: 992px) and (max-width: 1300px) {
-    
+    nav.navbar .nav-item{
+		width: initial;
+    	padding-inline: initial;
+	}
 }
 
 @media (min-width: 1181px) and (max-width: 1300px) {
