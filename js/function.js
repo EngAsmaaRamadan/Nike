@@ -329,6 +329,47 @@ function closePopup(){
 	},500);
 }
 
+function search(searchButton){
+	let allProductsHidden = document.querySelectorAll('.part.d-none, .product.d-none');
+	if(allProductsHidden != []){
+		allProductsHidden.forEach(function(product){
+			product.classList.remove('d-none');
+		});
+	}
+	
+	let searchValue = searchButton.parentElement.querySelector('input').value;
+	let existedIds = [],
+		result = products.filter(function(product){
+			return product.name.toLowerCase().includes(searchValue.toLowerCase());
+		});
+	result.forEach(function(product){
+		existedIds.push(product.id);
+	});
+	hideAllNotMatchedProducts(existedIds);
+}
+
+function hideAllNotMatchedProducts(existedIds){
+		let notMatchedProducts = [];
+		products.forEach(function(product,productIndex){
+			if(!existedIds.includes(product.id)){
+				notMatchedProducts.push(product);				
+			}
+		});
+		notMatchedProducts.forEach(function(notMatchedProduct){
+			console.log(notMatchedProduct);
+			if(latest.includes(notMatchedProduct)){
+				let currentRemoveLatestProduct = document.querySelector(`.product[data-product-id="${notMatchedProduct.id}"]`);
+				console.log(currentRemoveLatestProduct);
+				currentRemoveLatestProduct.classList.add('d-none');
+			}else{
+				let currentRemoveFeaturesProduct = document.querySelector(`.product[data-product-id="${notMatchedProduct.id}"]`);
+				console.log(currentRemoveFeaturesProduct);
+				currentRemoveFeaturesProduct.parentElement.parentElement.classList.add('d-none');
+			}
+		});
+	
+}
+
 function updateordersInLocalStorage(){
 	localStorage.setItem('cartProducts',JSON.stringify(cartProducts));
 }
@@ -344,10 +385,6 @@ function updateActiveSlider(lastActiveSliderIndex){
 function updateCurrentImgLogo(currentHref){
 	localStorage.setItem('currentImgLogoHref',currentHref);
 }
-
-// function updateCurrentNavImg(imgSrc){
-// 	localStorage.setItem('currentNavImg',imgSrc);
-// }
 
 function updateCurrentsectionAndNavImagesSrc(imageSrcArr){
 	localStorage.setItem('currentsectionAndNavImagesSrc',JSON.stringify(imageSrcArr));

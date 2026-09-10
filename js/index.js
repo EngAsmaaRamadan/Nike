@@ -183,9 +183,9 @@ latest.forEach(function(product){
 
 features.forEach(function(product){
 	featuredContentRow.innerHTML += `
-		<div class="col-lg-3">
+		<div class="col-lg-3 part">
 			<div class="item">
-				<div class="product">
+				<div class="product" data-product-id="${product.id}">
 					<p class="discount text-center ${(product.discount == 0) ? 'd-none': ''}">-${product.discount * 100}%</p>
 					<div class="head mb-5">
 						<img src="images/products/${product.images[0]}" class="img-fluid selectedImg" alt="shoes image">
