@@ -56,7 +56,12 @@ if(localStorage.getItem('currentsectionAndNavImagesSrc') != null){
 		sectionImg.src = sources[index + 1];
 	});
 }else{
-	updateCurrentsectionAndNavImagesSrc([]);
+	let srcArr = [];
+	srcArr.push(logoEle.src)
+	sectionImgs.forEach(function(sectionImg){
+		srcArr.push(sectionImg.src);
+	});
+	updateCurrentsectionAndNavImagesSrc(srcArr);
 }
 
 
@@ -130,7 +135,7 @@ window.addEventListener('DOMContentLoaded',function(){
 latest.forEach(function(product){
 	let isProductIntoCart = checkIfProductIntoCart(product.id);
 	latestContent.innerHTML += `
-		<div class="product mainBorder rounded-3 pt-3 px-3 mb-3" data-selected-color="${isProductIntoCart?.color ?? product.colors[0]}" data-selected-size="${isProductIntoCart?.size ?? product.sizes[0]}" data-product-id="${product.id}">
+		<div class="product mainBorder rounded-3 pt-3 px-3 mb-3" data-selected-color="${isProductIntoCart?.color ?? product.colors[0]}" data-selected-size="${isProductIntoCart?.size ?? product.sizes[0]}" data-product-id="${product.id}" data-type="show">
 			<div class="row">
 				<div class="col-lg-6 part1">
 					<div class="item">
@@ -183,7 +188,7 @@ latest.forEach(function(product){
 
 features.forEach(function(product){
 	featuredContentRow.innerHTML += `
-		<div class="col-lg-3 part">
+		<div class="col-lg-3 part" data-type="show">
 			<div class="item">
 				<div class="product" data-product-id="${product.id}">
 					<p class="discount text-center ${(product.discount == 0) ? 'd-none': ''}">-${product.discount * 100}%</p>

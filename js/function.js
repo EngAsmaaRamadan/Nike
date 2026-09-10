@@ -330,10 +330,11 @@ function closePopup(){
 }
 
 function search(searchButton){
-	let allProductsHidden = document.querySelectorAll('.part.d-none, .product.d-none');
+	let allProductsHidden = document.querySelectorAll('.d-none[data-type="hide"]');
 	if(allProductsHidden != []){
 		allProductsHidden.forEach(function(product){
 			product.classList.remove('d-none');
+			product.setAttribute('data-type','show');
 		});
 	}
 	
@@ -356,18 +357,24 @@ function hideAllNotMatchedProducts(existedIds){
 			}
 		});
 		notMatchedProducts.forEach(function(notMatchedProduct){
-			console.log(notMatchedProduct);
 			if(latest.includes(notMatchedProduct)){
 				let currentRemoveLatestProduct = document.querySelector(`.product[data-product-id="${notMatchedProduct.id}"]`);
-				console.log(currentRemoveLatestProduct);
 				currentRemoveLatestProduct.classList.add('d-none');
+				currentRemoveLatestProduct.setAttribute('data-type','hide');
 			}else{
 				let currentRemoveFeaturesProduct = document.querySelector(`.product[data-product-id="${notMatchedProduct.id}"]`);
-				console.log(currentRemoveFeaturesProduct);
-				currentRemoveFeaturesProduct.parentElement.parentElement.classList.add('d-none');
+				let currentRemoveProduct = currentRemoveFeaturesProduct.parentElement.parentElement;
+				currentRemoveProduct.classList.add('d-none');
+				currentRemoveProduct.setAttribute('data-type','hide');
 			}
 		});
-	
+	scrollToFisrtExist(document.querySelectorAll('[data-type="show"]'));
+}
+
+function scrollToFisrtExist(arrayOfMatchedProducts){
+	let topOfFirstMatch = arrayOfMatchedProducts[0].offsetTop;
+	console.log(topOfFirstMatch,arrayOfMatchedProducts);
+	window.scrollTo(0,topOfFirstMatch);
 }
 
 function updateordersInLocalStorage(){
