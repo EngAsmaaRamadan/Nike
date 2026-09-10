@@ -26,31 +26,38 @@ if(localStorage.getItem('cartProducts') == null){
 	cartProducts = JSON.parse(localStorage.getItem('cartProducts'));
 }
 
-// if(localStorage.getItem('currentMainColor') != null ){
-// 	html.style.setProperty('--main-color',localStorage.getItem('currentMainColor'));
-// }else{
-// 	updateCurrentColor(getComputedStyle(html).getPropertyValue('--main-color'));
-// }
+if(localStorage.getItem('currentMainColor') != null ){
+	html.style.setProperty('--main-color',localStorage.getItem('currentMainColor'));
+}else{
+	updateCurrentColor(getComputedStyle(html).getPropertyValue('--main-color'));
+}
 
-// if(localStorage.getItem('currentImgLogoHref') != null){
-// 	logoIcon.href = localStorage.getItem('currentImgLogoHref');
-// }else{
-// 	updateCurrentImgLogo(logoIcon.href);
-// }
+if(localStorage.getItem('lastActiveSliderIndex') != null){
+	let currentIndex = JSON.parse(localStorage.getItem('lastActiveSliderIndex')),
+		currentActiveSlider = scCarousel.querySelector(`.SC-Carousel-item[data-index-item="${currentIndex}"]`);
+	currentActiveSlider.classList.add('active');
+	if(currentIndex != 0 ){
+		scCarousel.querySelector(`.SC-Carousel-item:first-child`).classList.remove('active');
+	}
+}else{
+	scCarousel.querySelector(`.SC-Carousel-item:first-child`).classList.add('active');
+}
 
-// if(localStorage.getItem('currentNavImg') != null){
-// 	navImg.src = localStorage.getItem('currentNavImg');
-// }else{
-// 	updateCurrentNavImg(navImg.src);
-// }
+if(localStorage.getItem('currentImgLogoHref') != null){
+	logoIcon.href = localStorage.getItem('currentImgLogoHref');
+}else{
+	updateCurrentImgLogo(logoIcon.href);
+}
 
-// if(localStorage.getItem('currentsectionImg') != null){
-// 	sectionImgs.forEach(function(sectionImg){
-// 		sectionImg.src = localStorage.getItem('currentsectionImg');
-// 	});
-// }else{
-// 	updateCurrentsectionImg(sectionImgs[0].src);
-// }
+if(localStorage.getItem('currentsectionAndNavImagesSrc') != null){
+	let sources = JSON.parse(localStorage.getItem('currentsectionAndNavImagesSrc'));
+	logoEle.src = sources[0];
+	sectionImgs.forEach(function(sectionImg,index){
+		sectionImg.src = sources[index + 1];
+	});
+}else{
+	updateCurrentsectionAndNavImagesSrc([]);
+}
 
 
 
@@ -61,14 +68,15 @@ nextCarousel.addEventListener('click',function(){
 		currentColor = newSlide.dataset.colorName;
 	currentSlide.classList.remove('active');
 	newSlide.classList.add('active');
+	updateActiveSlider(newSlide.getAttribute('data-index-item'));
 	changeMainColor(currentColor);
 	updateImgLogo(currentColor);
-	changeImg(currentColor,logoEle,'logo');
-	// updateCurrentImg(newSrc);
+	let newSrcArr = [];
+	newSrcArr.push(changeImg(currentColor,logoEle,'logo'));
 	sectionImgs.forEach(function(img){
-		changeImg(currentColor,img,'correct');
+		newSrcArr.push(changeImg(currentColor,img,'correct'));
 	});
-	// updateCurrentsectionImg(newSrc);
+	updateCurrentsectionAndNavImagesSrc(newSrcArr);
 });
 
 prevCarousel.addEventListener('click',function(){
@@ -77,14 +85,15 @@ prevCarousel.addEventListener('click',function(){
 		currentColor = newSlide.dataset.colorName;
 	currentSlide.classList.remove('active');
 	newSlide.classList.add('active');
+	updateActiveSlider(newSlide.getAttribute('data-index-item'));
 	changeMainColor(currentColor);
 	updateImgLogo(currentColor);
-	changeImg(currentColor,logoEle,'logo');
-	// updateCurrentImg(newSrc);
+	let newSrcArr = [];
+	newSrcArr.push(changeImg(currentColor,logoEle,'logo'));
 	sectionImgs.forEach(function(img){
-		changeImg(currentColor,img,'correct');
+		newSrcArr.push(changeImg(currentColor,img,'correct'));
 	});
-	// updateCurrentsectionImg(newSrc);
+	updateCurrentsectionAndNavImagesSrc(newSrcArr);
 });
 
 navItems.forEach(function(navItem){

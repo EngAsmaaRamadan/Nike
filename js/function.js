@@ -1,15 +1,16 @@
 function changeMainColor(colorName){
 	let currentColor = getComputedStyle(html).getPropertyValue(`--${colorName}-color`);
 	html.style.setProperty('--main-color',currentColor);
-	// updateCurrentColor(currentColor);
+	updateCurrentColor(currentColor);
 }
 
 function changeImg(imgName,imgEle,common){
 	let imgSrc = imgEle.src,
 		imgSrcArr = imgSrc.split('/');
 	imgSrcArr[imgSrcArr.length - 1] = `${imgName}-${common}.png`;
-	newSrc = imgSrcArr.join('/');
+	let newSrc = imgSrcArr.join('/');
 	imgEle.setAttribute('src',newSrc);
+	return newSrc;
 }
 
 function updateImgLogo(imgName){
@@ -18,7 +19,7 @@ function updateImgLogo(imgName){
 	imgHrefArr[imgHrefArr.length - 1] = `${imgName}-logo.png`;
 	let newHref = imgHrefArr.join('/');
 	logoIcon.href = newHref;
-	// updateCurrentImgLogo(newHref);
+	updateCurrentImgLogo(newHref);
 }
 
 function checkScrollNav(){
@@ -332,18 +333,22 @@ function updateordersInLocalStorage(){
 	localStorage.setItem('cartProducts',JSON.stringify(cartProducts));
 }
 
-// function updateCurrentColor(currentColor){
-// 	localStorage.setItem('currentMainColor',currentColor);
-// }
+function updateCurrentColor(currentColor){
+	localStorage.setItem('currentMainColor',currentColor);
+}
 
-// function updateCurrentImgLogo(currentHref){
-// 	localStorage.setItem('currentImgLogoHref',currentHref);
-// }
+function updateActiveSlider(lastActiveSliderIndex){
+	localStorage.setItem('lastActiveSliderIndex',JSON.stringify(lastActiveSliderIndex));
+}
+
+function updateCurrentImgLogo(currentHref){
+	localStorage.setItem('currentImgLogoHref',currentHref);
+}
 
 // function updateCurrentNavImg(imgSrc){
 // 	localStorage.setItem('currentNavImg',imgSrc);
 // }
 
-// function updateCurrentsectionImg(imgSrc){
-// 	localStorage.setItem('currentsectionImg',imgSrc);
-// }
+function updateCurrentsectionAndNavImagesSrc(imageSrcArr){
+	localStorage.setItem('currentsectionAndNavImagesSrc',JSON.stringify(imageSrcArr));
+}
