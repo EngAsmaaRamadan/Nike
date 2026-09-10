@@ -403,17 +403,15 @@ function scrollToFisrtExist(featuredProducts,latestProducts){
 		},1000);
 	}else if(latestProducts.length > 0 && featuredProducts.length > 0){
 		let arr =[];
-		console.log(latestProducts);
 		arr.push(latestProducts,featuredProducts);
 		topOfFirstMatch = arr[0][0].offsetTop;
-			totalLength = latestProducts.length + featuredProducts.length;
 		for(let i = 0 ; i < latestProducts.length; i++){
 			arr[0][i].classList.add('searched');
 			setTimeout(function(){
 				arr[0][i].classList.remove('searched');	
 			},1000);
 		}
-		for(let j = latestProducts.length ; j < totalLength; j++){
+		for(let j = 0 ; j < featuredProducts.length ; j++){
 			arr[1][j].querySelector('.item').classList.add('searched');
 			setTimeout(function(){
 				arr[1][j].querySelector('.item').classList.remove('searched');	
