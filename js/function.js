@@ -344,11 +344,22 @@ function search(searchButton){
 		result = products.filter(function(product){
 			return product.name.toLowerCase().includes(searchValue.toLowerCase());
 		});
-		result.forEach(function(product){
-			existedIds.push(product.id);
-		});
-		hideAllNotMatchedProducts(existedIds);	
-	}
+		if(result.length > 0){
+				result.forEach(function(product){
+				existedIds.push(product.id);
+			});
+			hideAllNotMatchedProducts(existedIds);	
+		}else{
+			let statementWhenEmpty = document.querySelector('.popup .statement');
+			statementWhenEmpty.textContent = "please try in different words";
+			openPopup('search');
+		}
+		
+	}else{
+		let statementWhenEmpty = document.querySelector('.popup .statement');
+		statementWhenEmpty.textContent = "please write something to search";
+		openPopup('search');
+	} 
 	
 }
 

@@ -451,3 +451,39 @@ ul.color li.color.active{
 #Featured .content .item.searched{
     background-color: rgba(25, 135, 84, 0.5);
 }
+
+.popup-search .popup-box{
+	width: 450px;
+	position: absolute;
+	background: #333333;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    transition-duration: 1s;
+}
+
+.popup-search.show .popup-box{
+	transform: translate(-50%, -50%);
+}
+
+.popup-search .popup-box .no-result{
+	justify-content: space-between;
+}
+
+.popup-search .popup-box .no-result i.close{
+	color:#C9C9C9;
+	font-size: 16px;
+}
+
+.popup-search .popup-box .buttons{
+	display: flex;
+	justify-content: right;
+}
+
+.popup-search.active{
+	display: flex;
+}
+
+.popup-search.show{
+	opacity: 1;
+}
