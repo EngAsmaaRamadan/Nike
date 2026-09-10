@@ -443,3 +443,11 @@ ul.color li.color.active{
 	border-color: transparent;
 	background-color: var(--green-color);
 }
+
+#Latest .product.searched{
+    background-color: rgba(25, 135, 84, 0.5);
+}
+
+#Featured .content .item.searched{
+    background-color: rgba(25, 135, 84, 0.5);
+}

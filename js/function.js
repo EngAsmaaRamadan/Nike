@@ -331,7 +331,7 @@ function closePopup(){
 
 function search(searchButton){
 	let allProductsHidden = document.querySelectorAll('.d-none[data-type="hide"]');
-	if(allProductsHidden != []){
+	if(allProductsHidden.length > 0){
 		allProductsHidden.forEach(function(product){
 			product.classList.remove('d-none');
 			product.setAttribute('data-type','show');
@@ -339,14 +339,17 @@ function search(searchButton){
 	}
 	
 	let searchValue = searchButton.parentElement.querySelector('input').value;
-	let existedIds = [],
+	if(searchValue !=''){
+		let existedIds = [],
 		result = products.filter(function(product){
 			return product.name.toLowerCase().includes(searchValue.toLowerCase());
 		});
-	result.forEach(function(product){
-		existedIds.push(product.id);
-	});
-	hideAllNotMatchedProducts(existedIds);
+		result.forEach(function(product){
+			existedIds.push(product.id);
+		});
+		hideAllNotMatchedProducts(existedIds);	
+	}
+	
 }
 
 function hideAllNotMatchedProducts(existedIds){
@@ -368,12 +371,55 @@ function hideAllNotMatchedProducts(existedIds){
 				currentRemoveProduct.setAttribute('data-type','hide');
 			}
 		});
-	scrollToFisrtExist(document.querySelectorAll('[data-type="show"]'));
+		let featuredProducts = document.querySelectorAll('.part[data-type="show"]'),
+			latestProducts = document.querySelectorAll('.product[data-type="show"]');;
+	scrollToFisrtExist(featuredProducts,latestProducts);
 }
 
-function scrollToFisrtExist(arrayOfMatchedProducts){
-	let topOfFirstMatch = arrayOfMatchedProducts[0].offsetTop;
-	console.log(topOfFirstMatch,arrayOfMatchedProducts);
+function scrollToFisrtExist(featuredProducts,latestProducts){
+	let topOfFirstMatch;
+	if(featuredProducts.length == 0 && latestProducts.length > 0){
+		topOfFirstMatch = latestProducts[0].offsetTop;
+		latestProducts.forEach(function(product){
+			product.classList.add('searched');
+		});
+		
+		setTimeout(function(){
+			latestProducts.forEach(function(product){
+					product.classList.remove('searched');	
+			});
+		},1000);
+
+	}else if(latestProducts.length == 0 && featuredProducts.length > 0){
+		topOfFirstMatch = featuredProducts[0].offsetTop;
+		featuredProducts.forEach(function(product){
+			product.querySelector('.item').classList.add('searched');
+		});
+		
+		setTimeout(function(){
+			featuredProducts.forEach(function(product){
+					product.querySelector('.item').classList.remove('searched');	
+			});
+		},1000);
+	}else if(latestProducts.length > 0 && featuredProducts.length > 0){
+		let arr =[];
+		console.log(latestProducts);
+		arr.push(latestProducts,featuredProducts);
+		topOfFirstMatch = arr[0][0].offsetTop;
+			totalLength = latestProducts.length + featuredProducts.length;
+		for(let i = 0 ; i < latestProducts.length; i++){
+			arr[0][i].classList.add('searched');
+			setTimeout(function(){
+				arr[0][i].classList.remove('searched');	
+			},1000);
+		}
+		for(let j = latestProducts.length ; j < totalLength; j++){
+			arr[1][j].querySelector('.item').classList.add('searched');
+			setTimeout(function(){
+				arr[1][j].querySelector('.item').classList.remove('searched');	
+			},1000);
+		}
+	}
 	window.scrollTo(0,topOfFirstMatch);
 }
 
