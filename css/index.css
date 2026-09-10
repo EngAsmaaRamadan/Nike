@@ -16,6 +16,10 @@ nav.navbar .navbar-brand{
 	width: 8%;
 }
 
+nav .collapse.navbar-collapse{
+	justify-content: space-between;
+}
+
 nav.navbar .nav-link{
 	letter-spacing: 1.5px;
 }
