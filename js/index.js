@@ -17,7 +17,8 @@ let scCarousel = document.querySelector("#SC-Carousel"),
 	navButton = document.querySelector('.navbar-toggler'),
 	buyButton = document.querySelector('.popup[data-popup-name="shop"] .body .buy'),
 	navUlDiv = document.querySelector('.sc-collapse'),
-	cartProducts = [];
+	cartProducts = [],
+	favouriteProducts = [];
 
 //check scroll to remove opacity from nav when page loaded
 checkScrollNav();
@@ -26,6 +27,12 @@ if(localStorage.getItem('cartProducts') == null){
 	updateordersInLocalStorage();
 }else{
 	cartProducts = JSON.parse(localStorage.getItem('cartProducts'));
+}
+
+if(localStorage.getItem('favouriteProducts') == null){
+	updateFavouritesInLocalStorage();
+}else{
+	favouriteProducts = JSON.parse(localStorage.getItem('favouriteProducts'));
 }
 
 if(localStorage.getItem('currentMainColor') != null ){
@@ -137,7 +144,7 @@ window.addEventListener('DOMContentLoaded',function(){
 latest.forEach(function(product){
 	let isProductIntoCart = checkIfProductIntoCart(product.id);
 	latestContent.innerHTML += `
-		<div class="product mainBorder rounded-3 pt-3 px-3 mb-3" data-selected-color="${isProductIntoCart?.color ?? product.colors[0]}" data-selected-size="${isProductIntoCart?.size ?? product.sizes[0]}" data-product-id="${product.id}" data-type="show">
+		<div class="product mainBorder rounded-3 pt-3 px-3 mb-3" data-favourite-type="add" ondblclick="addToFavouriteCart(this,${product.id});" data-selected-color="${isProductIntoCart?.color ?? product.colors[0]}" data-selected-size="${isProductIntoCart?.size ?? product.sizes[0]}" data-product-id="${product.id}" data-type="show">
 			<div class="row">
 				<div class="col-lg-6 part1">
 					<div class="item">
@@ -189,10 +196,11 @@ latest.forEach(function(product){
 });
 
 features.forEach(function(product){
+	let isProductIntoCart = checkIfProductIntoCart(product.id,favouriteProducts);
 	featuredContentRow.innerHTML += `
 		<div class="col-lg-3 part" data-type="show">
 			<div class="item">
-				<div class="product" data-product-id="${product.id}">
+				<div class="product" data-favourite-type="add"  data-selected-color="${isProductIntoCart?.color ?? product.colors[0]}" data-selected-size="${isProductIntoCart?.size ?? product.sizes[0]}" ondblclick="addToFavouriteCart(this,${product.id});" data-product-id="${product.id}">
 					<p class="discount text-center ${(product.discount == 0) ? 'd-none': ''}">-${product.discount * 100}%</p>
 					<div class="head mb-5">
 						<img src="images/products/${product.images[0]}" class="img-fluid selectedImg" alt="shoes image">

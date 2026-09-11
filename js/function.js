@@ -104,11 +104,15 @@ function changeSelectedImg(that,imageName){
 	selectedImg.src = selectedImgNewSrc
 }
 
-function changeActive(that,productId = 0){
+function changeActive(that,productId = 0,x){
 	if(productId == 0){
 		let currentActiveIndicator = that.parentElement.querySelector('.active');
 			currentActiveIndicator.classList.remove('active');
-			that.classList.add('active');	
+			that.classList.add('active');
+			if(x == 1){console.log('it is indicator');}
+			console.log(that);
+			console.log(currentActiveIndicator);
+			console.log('====================');
 	}else{
 		let product = document.querySelector(`.product[data-product-id="${productId}"]`),
 			productOriginalData = getProduct(productId);;
@@ -126,14 +130,36 @@ function changeActive(that,productId = 0){
 	
 }
 
-function prepareIndicators(imagesList){
+function prepareIndicators(imagesList,isProductIntoCart = null){
 	let liElements = "";
 	imagesList.forEach(function(image,index){
 		liElements += `
-			<li class="mainButton ${(index == 0)? 'active' : ''}" onclick="changeSelectedImg(this,'${image}');changeActive(this);"></li>
+			<li class="mainButton ${(index == 0)? 'active' : ''}" onclick="changeSelectedImg(this,'${image}');changeActive(this,null,1);"></li>
 		`;
 	});
+
+
+
+	// if(isProductIntoCart == null){
+	// 	imagesList.forEach(function(image,index){
+	// 	liElements += `
+	// 		<li class="mainButton ${(index == 0)? 'active' : ''}" onclick="changeActive(this);updateSelectedSize(this,'${image}');">${image}</li>
+	// 	`;
+	// 	});
+	// }else{
+	// 	imagesList.forEach(function(image){
+	// 	liElements += `
+	// 		<li class="mainButton ${(image == isProductIntoCart.image)? 'active' : ''}" onclick="changeActive(this);updateSelectedSize(this,'${image}');">${image}</li>
+	// 	`;
+	// 	});
+	// }
+
+
 	return liElements;
+}
+
+function updateSelectedIndicators(that,indicator){
+
 }
 
 function showProduct(productId){
@@ -191,8 +217,8 @@ function showProduct(productId){
 	openPopup('product');
 }
 
-function checkIfProductIntoCart(productId){
-	let result = cartProducts.filter( (cartProduct) => cartProduct.id == productId);
+function checkIfProductIntoCart(productId,typeOfProducts = cartProducts){
+	let result = typeOfProducts.filter( (typeOfProduct) => typeOfProduct.id == productId);
 	return (result.length != 0) ? result[0] : null ;
 }
 
@@ -227,11 +253,26 @@ function addToCart(that,productId){
 			size: product.getAttribute('data-selected-size'),
 			color: product.getAttribute('data-selected-color')
 		};
-
 	cartProducts.push(newOrder);
 	updateordersInLocalStorage();
 	toggleBtn(that,'remove');
 	that.setAttribute('onclick',`removeFromCart(this,${productId})`);
+}
+
+function addToFavouriteCart(that,productId){
+	console.log('hi');
+	let newOrder = {
+			id: productId,
+			size: that.getAttribute('data-selected-size'),
+			color: that.getAttribute('data-selected-color')
+		};
+		if(that.getAttribute('data-favourite-type') == "add"){
+			favouriteProducts.push(newOrder);
+			updateFavouritesInLocalStorage();
+			that.setAttribute('data-favourite-type','delete');
+		}else if(that.getAttribute('data-favourite-type') == 'delete'){
+			that.setAttribute('data-favourite-type','add');
+		}
 }
 
 function removeFromCart(that,productId){
@@ -254,8 +295,8 @@ function toggleBtn(that,status){
 	}
 }
 
-function showProductsInPopupShop(){
-	let productsContent = document.querySelector('.popup[data-popup-name="shop"] .row');
+function showProductsInPopup(popupName,typeOfProducts){
+	let productsContent = document.querySelector(`.popup[data-popup-name="${popupName}"] .row`);
 	if(cartProducts.length == 0){
 		alert.classList.remove('d-none');
 		buyButton.classList.add('d-none');
@@ -263,13 +304,13 @@ function showProductsInPopupShop(){
 		alert.classList.add('d-none');
 		buyButton.classList.remove('d-none');
 		productsContent.innerHTML = '';
-	cartProducts.forEach(function(cartProduct){
-		let product = getProduct(cartProduct.id);
+	typeOfProducts.forEach(function(typeOfProduct){
+		let product = getProduct(typeOfProduct.id);
 		productsContent.innerHTML += `
 			<div class="col-lg-4">
 				<div class="item text-start">
 					<div class="product">
-						<img src="images/products/${product.images[0]}" alt="products shop" class="img-fluid">
+						<img src="images/products/${product.images[0]}" alt="products" class="img-fluid">
 						<h4>${(product.name).slice(0,14)}...</h4>
 						
 						<div class="info d-flex mb-2">
@@ -280,13 +321,13 @@ function showProductsInPopupShop(){
 						<div class="info d-flex mt-3">
 							<h6 class="size fw-bolder mb-0 me-3">Size :</h6>
 							<ul class="list-unstyled d-flex column-gap-2 size">
-								${prepareSizeList([cartProduct.size])}
+								${prepareSizeList([typeOfProduct.size])}
 							</ul>
 						</div>
 						<div class="info d-flex">
 							<h6 class="color fw-bolder mb-0 me-3">Color  :</h6>
 							<ul class="list-unstyled d-flex column-gap-2 mb-2 color">
-								${prepareColorList([cartProduct.color])}
+								${prepareColorList([typeOfProduct.color])}
 							</ul>
 
 						</div>
@@ -300,7 +341,7 @@ function showProductsInPopupShop(){
 		
 	}
 	
-	openPopup('shop');
+	openPopup(popupName);
 }
 
 function removeFromCartInPopup(that,productId){
@@ -434,6 +475,10 @@ function scrollToFisrtExist(featuredProducts,latestProducts){
 
 function updateordersInLocalStorage(){
 	localStorage.setItem('cartProducts',JSON.stringify(cartProducts));
+}
+
+function updateFavouritesInLocalStorage(){
+	localStorage.setItem('favouriteProducts',JSON.stringify(favouriteProducts));
 }
 
 function updateCurrentColor(currentColor){

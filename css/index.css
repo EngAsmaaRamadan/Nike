@@ -401,6 +401,7 @@ header #SC-Carousel .SC-Carousel-inner .SC-Carousel-item.active .row .part2 img:
 }
 
 .popup[data-popup-name="shop"] .popup-box,
+.popup[data-popup-name="favourite"] .popup-box,
 .popup[data-popup-name="product"] .popup-box{
 	 width: 55%;
 	 border-radius: 10px;
@@ -413,26 +414,31 @@ header #SC-Carousel .SC-Carousel-inner .SC-Carousel-item.active .row .part2 img:
 	padding: 20px;
 }
 
-.popup[data-popup-name="shop"] .popup-box{
+.popup[data-popup-name="shop"] .popup-box,
+.popup[data-popup-name="favourite"] .popup-box{
 	 margin: 20px auto;
 	 padding: 10px;
 }
 
-.popup[data-popup-name="shop"] .popup-box .item{
+.popup[data-popup-name="shop"] .popup-box .item,
+.popup[data-popup-name="favourite"] .popup-box .item{
 	background-color: #fff;
 	padding: 20px;
 	border-radius: 10px;
 }
 
-.popup[data-popup-name="shop"].active{
+.popup[data-popup-name="shop"].active,
+.popup[data-popup-name="favourite"].active{
     display: block;
 }
 
-.popup[data-popup-name="shop"]{
+.popup[data-popup-name="shop"],
+.popup[data-popup-name="favourite"]{
     overflow-y: auto;
 }
 
-.popup[data-popup-name="shop"] h4{
+.popup[data-popup-name="shop"] h4,
+.popup[data-popup-name="favourite"] h4{
 	font-size: 20px;
 }
 
