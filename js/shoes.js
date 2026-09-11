@@ -40,7 +40,7 @@ var features = [
         'name': '2.0 INK Sport Running',
         'images': ['4-1.png', '4-2.png', '4-3.png', '4-4.png'],
         'sizes': ['S', 'L'],
-        'colors': ['#0f0', '#fff'],
+        'colors': ['#fff', '#c9e8e8'],
         'price': 132.66,
         'discount': 0.10,
         'description': `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consectetur, aspernatur. Eveniet,
