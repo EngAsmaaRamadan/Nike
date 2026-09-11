@@ -33,7 +33,10 @@ nav.navbar .navbar-toggler span{
 }
 
 nav .sc-collapse{
-	justify-content: space-around;
+	display: flex;
+    justify-content: space-around;
+	align-items: center;
+	width: 100%;
 }
 
 button:focus:not(:focus-visible){

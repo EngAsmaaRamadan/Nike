@@ -169,6 +169,13 @@
 		width: initial;
     	padding-inline: initial;
 	}
+
+	nav .sc-collapse{
+		width: 100%;
+		display: flex;
+	    justify-content: space-around;
+	    align-items: center;
+	}
 }
 
 @media (min-width: 1181px) and (max-width: 1300px) {
