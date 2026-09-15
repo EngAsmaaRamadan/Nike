@@ -259,7 +259,7 @@ function addToCart(that,productId){
 	that.setAttribute('onclick',`removeFromCart(this,${productId})`);
 }
 
-function addToFavouriteCart(that,productId){
+function addToFavouriteCart(that,productId,isFeatures = false){
 	console.log('hi');
 	let newOrder = {
 			id: productId,
@@ -270,12 +270,20 @@ function addToFavouriteCart(that,productId){
 			favouriteProducts.push(newOrder);
 			updateFavouritesInLocalStorage();
 			that.setAttribute('data-favourite-type','delete');
-			that.classList.add('favourited');
+			if(isFeatures == true){
+				that.closest('.item').classList.add('favourited');	
+			}else if(isFeatures == false){
+				that.classList.add('favourited');	
+			}
 		}else if(that.getAttribute('data-favourite-type') == 'delete'){
 			favouriteProducts.pop(newOrder);
 			updateFavouritesInLocalStorage();
 			that.setAttribute('data-favourite-type','add');
-			that.classList.remove('favourited');
+			if(isFeatures == true){
+				that.closest('.item').classList.remove('favourited');	
+			}else if(isFeatures == false){
+				that.classList.remove('favourited');	
+			}
 		}
 }
 

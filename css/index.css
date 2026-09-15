@@ -297,6 +297,10 @@ header #SC-Carousel .SC-Carousel-inner .SC-Carousel-item.active .row .part2 img:
 	overflow: hidden;
 }
 
+#Featured .content .item.favourited{
+    background-color: rgba(251, 37, 39, 0.5);
+}
+
 #Featured .product {
 	position: relative;
 }

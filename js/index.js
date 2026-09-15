@@ -200,7 +200,7 @@ features.forEach(function(product){
 	featuredContentRow.innerHTML += `
 		<div class="col-lg-3 part" data-type="show">
 			<div class="item">
-				<div class="product" data-favourite-type="add"  data-selected-color="${isProductIntoCart?.color ?? product.colors[0]}" data-selected-size="${isProductIntoCart?.size ?? product.sizes[0]}" ondblclick="addToFavouriteCart(this,${product.id});" data-product-id="${product.id}">
+				<div class="product" data-favourite-type="add"  data-selected-color="${isProductIntoCart?.color ?? product.colors[0]}" data-selected-size="${isProductIntoCart?.size ?? product.sizes[0]}" ondblclick="addToFavouriteCart(this,${product.id},true);" data-product-id="${product.id}">
 					<p class="discount text-center ${(product.discount == 0) ? 'd-none': ''}">-${product.discount * 100}%</p>
 					<div class="head mb-5">
 						<img src="images/products/${product.images[0]}" class="img-fluid selectedImg" alt="shoes image">
