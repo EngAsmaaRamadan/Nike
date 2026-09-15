@@ -425,6 +425,7 @@ function toggleBtn(that,status){
 function showProductsInPopup(popupName,typeOfProducts){
 	let productsContent = document.querySelector(`.popup[data-popup-name="${popupName}"] .row`),
 		 featuresIds = [];
+		 
 	features.forEach(function(feature){
 		featuresIds.push(feature.id);
 	});
