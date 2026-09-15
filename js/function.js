@@ -260,19 +260,27 @@ function addToCart(that,productId){
 }
 
 function addToFavouriteCart(that,productId,isFeatures){
-	let isIcon = (that.className.includes('favouriteIcon') ? true : false);
+	let isIcon = (that.className.includes('favouriteIcon') ? true : false),
+		iconAnimate;
+
 	console.log(isIcon);
 	if(isIcon == true){
 		let NewThat;
 		if(isFeatures == true){
 			NewThat = that.parentElement.querySelector('.product');
 			console.log(NewThat);
+			iconAnimate = NewThat.parentElement.querySelector('.heart');
+			iconAnimate.classList.add('animate');
 		}else if(isFeatures == false){
-			NewThat = that.parentElement;	
+			NewThat = that.parentElement;
 		}
 		console.log(NewThat);
 		updateAttributes(NewThat,productId,isFeatures,true);
 	}else if(isIcon == false){
+		if(isFeatures == true){
+			iconAnimate = that.parentElement.querySelector('.heart');
+			iconAnimate.classList.add('animate');
+		}
 		console.log(that);
 		updateAttributes(that,productId,isFeatures,false);	
 	}
@@ -294,37 +302,95 @@ function updateAttributes(that,productId,isFeatures,isIcon){
 			size: currentThat.getAttribute('data-selected-size'),
 			color: currentThat.getAttribute('data-selected-color')
 		};
+		updateWhenAdd(that,newOrder,isFeatures);
 		
-	if(that.getAttribute('data-favourite-type') == "add"){
-		favouriteProducts.push(newOrder);
-		updateFavouritesInLocalStorage();
-		that.setAttribute('data-favourite-type','delete');
-		if(isFeatures == true){
-			let iconHeart = that.closest('.item').querySelector('.favouriteIcon');
-			iconHeart.classList.remove('fa-regular');
-			iconHeart.classList.add('fa-solid');
-			that.closest('.item').classList.add('favourited');	
-		}else if(isFeatures == false){
-			let iconHeart = that.querySelector('.favouriteIcon');
-			iconHeart.classList.remove('fa-regular');
-			iconHeart.classList.add('fa-solid');
-			that.classList.add('favourited');
+}
+
+function updateWhenAdd(that,newOrder,isFeatures){
+		if(that.getAttribute('data-favourite-type') == "add"){
+				favouriteProducts.push(newOrder);
+				updateFavouritesInLocalStorage();
+				that.setAttribute('data-favourite-type','delete');
+					if(isFeatures == true){
+						let iconHeart = that.closest('.item').querySelector('.favouriteIcon');
+						iconHeart.classList.remove('fa-regular');
+						iconHeart.classList.add('fa-solid');
+						that.closest('.item').classList.add('favourited');	
+					}else if(isFeatures == false){
+						let iconHeart = that.querySelector('.favouriteIcon');
+						iconHeart.classList.remove('fa-regular');
+						iconHeart.classList.add('fa-solid');
+						that.classList.add('favourited');
+					}
+		}else if(that.getAttribute('data-favourite-type') == 'delete'){
+			favouriteProducts.pop(newOrder);
+			updateFavouritesInLocalStorage();
+			that.setAttribute('data-favourite-type','add');
+			if(isFeatures == true){
+				let iconHeart = that.closest('.item').querySelector('.favouriteIcon');
+				iconHeart.classList.add('fa-regular');
+				iconHeart.classList.remove('fa-solid');
+				that.closest('.item').classList.remove('favourited');	
+			}else if(isFeatures == false){
+				let iconHeart = that.querySelector('.favouriteIcon');
+				iconHeart.classList.add('fa-regular');
+				iconHeart.classList.remove('fa-solid');
+				console.log(that);
+				that.classList.remove('favourited');	
+			}
 		}
-	}else if(that.getAttribute('data-favourite-type') == 'delete'){
-		favouriteProducts.pop(newOrder);
-		updateFavouritesInLocalStorage();
-		that.setAttribute('data-favourite-type','add');
-		if(isFeatures == true){
-			let iconHeart = that.closest('.item').querySelector('.favouriteIcon');
-			iconHeart.classList.add('fa-regular');
-			iconHeart.classList.remove('fa-solid');
-			that.closest('.item').classList.remove('favourited');	
-		}else if(isFeatures == false){
-			let iconHeart = that.querySelector('.favouriteIcon');
-			iconHeart.classList.add('fa-regular');
-			iconHeart.classList.remove('fa-solid');
-			console.log(that);
-			that.classList.remove('favourited');	
+}
+
+function updateWhenRemove(obj,isFeatures){//??????????
+	let product = document.querySelector(`.product[data-product-id="${obj.id}"]`),
+		that = product;
+		if(that.getAttribute('data-favourite-type') == "add"){
+				
+			that.setAttribute('data-favourite-type','delete');
+				if(isFeatures == true){
+					let iconHeart = that.closest('.item').querySelector('.favouriteIcon');
+					iconHeart.classList.remove('fa-regular');
+					iconHeart.classList.add('fa-solid');
+					that.closest('.item').classList.add('favourited');	
+				}else if(isFeatures == false){
+					let iconHeart = that.querySelector('.favouriteIcon');
+					iconHeart.classList.remove('fa-regular');
+					iconHeart.classList.add('fa-solid');
+					that.classList.add('favourited');
+				}
+		}else if(that.getAttribute('data-favourite-type') == 'delete'){
+			
+			that.setAttribute('data-favourite-type','add');
+			if(isFeatures == true){
+				let iconHeart = that.closest('.item').querySelector('.favouriteIcon');
+				iconHeart.classList.add('fa-regular');
+				iconHeart.classList.remove('fa-solid');
+				that.closest('.item').classList.remove('favourited');	
+			}else if(isFeatures == false){
+				let iconHeart = that.querySelector('.favouriteIcon');
+				iconHeart.classList.add('fa-regular');
+				iconHeart.classList.remove('fa-solid');
+				console.log(that);
+				that.classList.remove('favourited');	
+			}
+		}
+}
+
+function removeFromCartInPopup(that,productId,popupName){
+	let btnOfLatestCurrentProduct = document.querySelector(`#Latest .product[data-product-id='${productId}'] button`);
+	if(popupName.includes('shop')){
+		typeOfProducts = cartProducts;
+	}else if(popupName.includes('favourite')){
+		typeOfProducts = favouriteProducts;
+	}
+	removeFromCart(btnOfLatestCurrentProduct,productId,typeOfProducts,popupName);
+	that.parentElement.parentElement.parentElement.remove();
+	if(cartProducts.length == 0 || favouriteProducts.length == 0){
+		console.log('hello');
+		let alert = document.querySelector(`.popup .alert.${popupName}`);
+		alert.classList.remove('d-none');
+		if(popupName.includes('shop')){
+			buyButton.classList.add('d-none');
 		}
 	}
 }
@@ -333,15 +399,17 @@ function removeFromCart(that,productId,typeOfProducts,popupName){
 	typeOfProducts = typeOfProducts.filter( (typeOfProduct) => typeOfProduct.id != productId);
 	if(popupName.includes('shop')){
 		cartProducts = typeOfProducts;
+		updateordersInLocalStorage();
 	}else if(popupName.includes('favourite')){
 		favouriteProducts = typeOfProducts;
+		updateFavouritesInLocalStorage();
 	}
-	updateordersInLocalStorage();
 	if(that != null && popupName.includes('shop')){
 		toggleBtn(that,'add');
 		that.setAttribute('onclick',`addToCart(this,${productId})`);
 		changeActive(that,productId);
 	}
+
 }
 
 function toggleBtn(that,status){
@@ -355,8 +423,11 @@ function toggleBtn(that,status){
 }
 
 function showProductsInPopup(popupName,typeOfProducts){
-	let productsContent = document.querySelector(`.popup[data-popup-name="${popupName}"] .row`);
-
+	let productsContent = document.querySelector(`.popup[data-popup-name="${popupName}"] .row`),
+		 featuresIds = [];
+	features.forEach(function(feature){
+		featuresIds.push(feature.id);
+	});
 	if(typeOfProducts.length == 0){
 		let alert = document.querySelector(`.popup .alert.${popupName}`);
 		alert.classList.remove('d-none');
@@ -371,8 +442,21 @@ function showProductsInPopup(popupName,typeOfProducts){
 			buyButton.classList.remove('d-none');
 		}
 		productsContent.innerHTML = '';
+		if(popupName.includes('shop')){
+			typeOfProducts = cartProducts;
+		}else if(popupName.includes('favourite')){
+			typeOfProducts = favouriteProducts;
+		}
+		console.log(featuresIds);
 	typeOfProducts.forEach(function(typeOfProduct){
-		let product = getProduct(typeOfProduct.id);
+		let product = getProduct(typeOfProduct.id),
+			isFeatures = featuresIds.forEach(function(id){
+				if(typeOfProduct.id == id){
+					return true;
+				}
+			});
+			console.log(typeOfProduct);
+		updateWhenRemove(typeOfProduct,isFeatures);
 		productsContent.innerHTML += `
 			<div class="col-lg-4">
 				<div class="item text-start">
@@ -398,7 +482,7 @@ function showProductsInPopup(popupName,typeOfProducts){
 							</ul>
 
 						</div>
-						<button class="btn btn-danger w-100 mt-3" onclick="removeFromCartInPopup(this,${product.id},${typeOfProducts},${popupName});">Remove</button>
+						<button class="btn btn-danger w-100 mt-3" onclick="removeFromCartInPopup(this,${product.id},'${popupName}');">Remove</button>
 					</div>
 				</div>
 			</div>
@@ -407,19 +491,6 @@ function showProductsInPopup(popupName,typeOfProducts){
 	});
 	}
 	openPopup(popupName);
-}
-
-function removeFromCartInPopup(that,productId,typeOfProducts,popupName){
-	let btnOfLatestCurrentProduct = document.querySelector(`#Latest .product[data-product-id='${productId}'] button`);
-	removeFromCart(btnOfLatestCurrentProduct,productId,typeOfProducts,popupName);
-	that.parentElement.parentElement.parentElement.remove();
-	if(typeOfProducts.length == 0){
-		let alert = document.querySelector(`.popup .alert.${popupName}`);
-		alert.classList.remove('d-none');
-		if(popupName.includes('shop')){
-			buyButton.classList.add('d-none');
-		}
-	}
 }
 
 function openPopup(popupName){

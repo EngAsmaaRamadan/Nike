@@ -205,6 +205,7 @@ features.forEach(function(product){
 		<div class="col-lg-3 part" data-type="show">
 			<div class="item ${(isProductIntoFavouriteCart != null) ? 'favourited' : ''} position-relative">
 			<i class="${(isProductIntoFavouriteCart != null) ? 'fa-solid' : 'fa-regular'} fa-heart favouriteIcon" onclick="addToFavouriteCart(this,${product.id},true);"></i>
+		<i class="fa-solid fa-heart heart animating-heart"></i>
 				<div class="product" ${(isProductIntoFavouriteCart != null) ? 'data-favourite-type="delete"' : 'data-favourite-type="add"' } data-selected-color="${isProductIntoCart?.color ?? product.colors[0]}" data-selected-size="${isProductIntoCart?.size ?? product.sizes[0]}" ondblclick="addToFavouriteCart(this,${product.id},true);" data-product-id="${product.id}">
 					<p class="discount text-center ${(product.discount == 0) ? 'd-none': ''}">-${product.discount * 100}%</p>
 					<div class="head mb-5">

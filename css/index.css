@@ -273,7 +273,24 @@ header #SC-Carousel .SC-Carousel-inner .SC-Carousel-item.active .row .part2 img:
 	position: absolute;
 	color: var(--first-color);
 	cursor: pointer;
+	z-index: 3;
+}
+
+#Featured .content .item i.heart{
+	position: absolute;
+	color: var(--first-color);
 	z-index: 2;
+	opacity: 0;
+	transition-duration: 0.5s;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) scale(0);
+    font-size: 100px;
+}
+
+#Featured .content .item i.heart.animate{
+	animation-name: heart;
+	animation-duration: 1s;
 }
 
 #Latest .product i.favouriteIcon{
@@ -310,6 +327,7 @@ header #SC-Carousel .SC-Carousel-inner .SC-Carousel-item.active .row .part2 img:
 
 #Featured .content .item {
 	background-color: #fff;
+	position: relative;
 	border-radius: 10px;
 	padding: 25px 20px;
 	overflow: hidden;
