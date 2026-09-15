@@ -270,15 +270,24 @@ function addToFavouriteCart(that,productId){
 			favouriteProducts.push(newOrder);
 			updateFavouritesInLocalStorage();
 			that.setAttribute('data-favourite-type','delete');
+			that.classList.add('favourited');
 		}else if(that.getAttribute('data-favourite-type') == 'delete'){
+			favouriteProducts.pop(newOrder);
+			updateFavouritesInLocalStorage();
 			that.setAttribute('data-favourite-type','add');
+			that.classList.remove('favourited');
 		}
 }
 
-function removeFromCart(that,productId){
-	cartProducts = cartProducts.filter( (cartProduct) => cartProduct.id != productId);
+function removeFromCart(that,productId,typeOfProducts,popupName){
+	typeOfProducts = typeOfProducts.filter( (typeOfProduct) => typeOfProduct.id != productId);
+	if(popupName.includes('shop')){
+		cartProducts = typeOfProducts;
+	}else if(popupName.includes('favourite')){
+		favouriteProducts = typeOfProducts;
+	}
 	updateordersInLocalStorage();
-	if(that != null){
+	if(that != null && popupName.includes('shop')){
 		toggleBtn(that,'add');
 		that.setAttribute('onclick',`addToCart(this,${productId})`);
 		changeActive(that,productId);
@@ -297,12 +306,20 @@ function toggleBtn(that,status){
 
 function showProductsInPopup(popupName,typeOfProducts){
 	let productsContent = document.querySelector(`.popup[data-popup-name="${popupName}"] .row`);
-	if(cartProducts.length == 0){
+
+	if(typeOfProducts.length == 0){
+		let alert = document.querySelector(`.popup .alert.${popupName}`);
 		alert.classList.remove('d-none');
-		buyButton.classList.add('d-none');
+		if(popupName.includes('shop')){
+			buyButton.classList.add('d-none');
+		}
+		productsContent.innerHTML = '';
 	}else{
+		let alert = document.querySelector(`.popup .alert.${popupName}`);
 		alert.classList.add('d-none');
-		buyButton.classList.remove('d-none');
+		if(popupName.includes('shop')){
+			buyButton.classList.remove('d-none');
+		}
 		productsContent.innerHTML = '';
 	typeOfProducts.forEach(function(typeOfProduct){
 		let product = getProduct(typeOfProduct.id);
@@ -331,30 +348,32 @@ function showProductsInPopup(popupName,typeOfProducts){
 							</ul>
 
 						</div>
-						<button class="btn btn-danger w-100 mt-3" onclick="removeFromCartInPopup(this,${product.id});">Remove</button>
+						<button class="btn btn-danger w-100 mt-3" onclick="removeFromCartInPopup(this,${product.id},${typeOfProducts},${popupName});">Remove</button>
 					</div>
 				</div>
 			</div>
 				</div>
 		`;
 	});
-		
 	}
-	
 	openPopup(popupName);
 }
 
-function removeFromCartInPopup(that,productId){
+function removeFromCartInPopup(that,productId,typeOfProducts,popupName){
 	let btnOfLatestCurrentProduct = document.querySelector(`#Latest .product[data-product-id='${productId}'] button`);
-	removeFromCart(btnOfLatestCurrentProduct,productId);
+	removeFromCart(btnOfLatestCurrentProduct,productId,typeOfProducts,popupName);
 	that.parentElement.parentElement.parentElement.remove();
-	if(cartProducts.length == 0){
+	if(typeOfProducts.length == 0){
+		let alert = document.querySelector(`.popup .alert.${popupName}`);
 		alert.classList.remove('d-none');
-		buyButton.classList.add('d-none');
+		if(popupName.includes('shop')){
+			buyButton.classList.add('d-none');
+		}
 	}
 }
 
 function openPopup(popupName){
+	console.log(popupName);
 	let popup = document.querySelector(`.popup[data-popup-name="${popupName}"]`);
 	popup.classList.add('active');
 	setTimeout(function(){

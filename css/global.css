@@ -18,6 +18,10 @@ a{
     background-color: rgba(25, 135, 84, 0.5);
 }
 
+#Latest .product.favourited{
+    background-color: rgba(251, 37, 39, 0.5);
+}
+
 .loading-page{
     position: fixed;
     top: 0;

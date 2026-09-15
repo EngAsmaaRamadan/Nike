@@ -46,7 +46,7 @@
 		        </div>
 
 	      <ul class="list-unstyled icons column-gap-3 mb-0">
-	      	<li><i class="fa-solid fa-heart" onclick="showProductsInPopup('favourite',favouriteProducts);"></i></li>
+	      	<li><i class="fa-solid fa-heart" onclick="showProductsInPopup('favourite',favouriteProducts);openPopup('favourite');"></i></li>
 	      	<li><i class="fa-solid fa-cart-shopping" onclick="showProductsInPopup('shop',cartProducts);"></i></li>
 	      	<li><i class="fa-solid fa-user" onclick="openPopup('login');"></i></li>
 	      </ul>
@@ -193,7 +193,7 @@
 				<h3 class="mainColor my-2">Shop</h3>
 			</div>
 			<div class="body">
-				<p class="alert alert-warning p-3 d-none mb-0">There are no products</p>
+				<p class="alert shop alert-warning p-3 d-none mb-0">There are no products</p>
 				<div class="row row-gap-3 mb-3">
 					
 				</div>
@@ -217,7 +217,7 @@
 				<h3 class="mainColor my-2">favourite</h3>
 			</div>
 			<div class="body">
-				<p class="alert alert-warning p-3 d-none mb-0">There are no products</p>
+				<p class="alert favourite alert-warning p-3 d-none mb-0">There are no products</p>
 				<div class="row row-gap-3 mb-3">
 					
 				</div>
