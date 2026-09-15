@@ -281,16 +281,16 @@ header #SC-Carousel .SC-Carousel-inner .SC-Carousel-item.active .row .part2 img:
 	color: var(--first-color);
 	z-index: 2;
 	opacity: 0;
-	transition-duration: 0.5s;
+	transition-duration: 3s;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%) scale(0);
-    font-size: 100px;
 }
 
 #Featured .content .item i.heart.animate{
 	animation-name: heart;
-	animation-duration: 1s;
+	animation-duration: 0.5s;
+	animation-timing-function: linear;
 }
 
 #Latest .product i.favouriteIcon{
@@ -334,7 +334,7 @@ header #SC-Carousel .SC-Carousel-inner .SC-Carousel-item.active .row .part2 img:
 }
 
 #Featured .content .item.favourited{
-    background-color: rgba(251, 37, 39, 0.5);
+    background-color: #f8d7da;
 }
 
 #Featured .product {
