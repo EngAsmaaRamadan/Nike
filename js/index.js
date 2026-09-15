@@ -142,9 +142,11 @@ window.addEventListener('DOMContentLoaded',function(){
 });
 
 latest.forEach(function(product){
-	let isProductIntoCart = checkIfProductIntoCart(product.id);
+	let isProductIntoCart = checkIfProductIntoCart(product.id),
+		isProductIntoFavouriteCart = checkIfProductIntoCart(product.id,favouriteProducts);
 	latestContent.innerHTML += `
-		<div class="product mainBorder rounded-3 pt-3 px-3 mb-3" data-favourite-type="add" ondblclick="addToFavouriteCart(this,${product.id});" data-selected-color="${isProductIntoCart?.color ?? product.colors[0]}" data-selected-size="${isProductIntoCart?.size ?? product.sizes[0]}" data-product-id="${product.id}" data-type="show">
+		<div class="product mainBorder rounded-3 pt-3 px-3 mb-3 position-relative ${(isProductIntoFavouriteCart != null) ? 'favourited' : ''}" ${(isProductIntoFavouriteCart != null) ? 'data-favourite-type="delete"' : 'data-favourite-type="add"' } ondblclick="addToFavouriteCart(this,${product.id});" data-selected-color="${isProductIntoCart?.color ?? product.colors[0]}" data-selected-size="${isProductIntoCart?.size ?? product.sizes[0]}" data-product-id="${product.id}" data-type="show">
+		<i class="fa-regular fa-heart favouriteIcon" onclick="addToFavouriteCart(this,${product.id},false);"></i>
 			<div class="row">
 				<div class="col-lg-6 part1">
 					<div class="item">
@@ -196,11 +198,14 @@ latest.forEach(function(product){
 });
 
 features.forEach(function(product){
-	let isProductIntoCart = checkIfProductIntoCart(product.id,favouriteProducts);
+	let productType;
+	let isProductIntoCart = checkIfProductIntoCart(product.id),
+		isProductIntoFavouriteCart = checkIfProductIntoCart(product.id,favouriteProducts);
 	featuredContentRow.innerHTML += `
 		<div class="col-lg-3 part" data-type="show">
-			<div class="item">
-				<div class="product" data-favourite-type="add"  data-selected-color="${isProductIntoCart?.color ?? product.colors[0]}" data-selected-size="${isProductIntoCart?.size ?? product.sizes[0]}" ondblclick="addToFavouriteCart(this,${product.id},true);" data-product-id="${product.id}">
+			<div class="item ${(isProductIntoFavouriteCart != null) ? 'favourited' : ''} position-relative">
+			<i class="fa-regular fa-heart favouriteIcon" onclick="addToFavouriteCart(this,${product.id},true);"></i>
+				<div class="product" ${(isProductIntoFavouriteCart != null) ? 'data-favourite-type="delete"' : 'data-favourite-type="add"' } data-selected-color="${isProductIntoCart?.color ?? product.colors[0]}" data-selected-size="${isProductIntoCart?.size ?? product.sizes[0]}" ondblclick="addToFavouriteCart(this,${product.id},true);" data-product-id="${product.id}">
 					<p class="discount text-center ${(product.discount == 0) ? 'd-none': ''}">-${product.discount * 100}%</p>
 					<div class="head mb-5">
 						<img src="images/products/${product.images[0]}" class="img-fluid selectedImg" alt="shoes image">

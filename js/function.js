@@ -217,7 +217,7 @@ function showProduct(productId){
 	openPopup('product');
 }
 
-function checkIfProductIntoCart(productId,typeOfProducts = cartProducts){
+function checkIfProductIntoCart(productId,typeOfProducts = cartProducts,productType){
 	let result = typeOfProducts.filter( (typeOfProduct) => typeOfProduct.id == productId);
 	return (result.length != 0) ? result[0] : null ;
 }
@@ -259,32 +259,74 @@ function addToCart(that,productId){
 	that.setAttribute('onclick',`removeFromCart(this,${productId})`);
 }
 
-function addToFavouriteCart(that,productId,isFeatures = false){
-	console.log('hi');
+function addToFavouriteCart(that,productId,isFeatures){
+	let isIcon = (that.className.includes('favouriteIcon') ? true : false);
+	console.log(isIcon);
+	if(isIcon == true){
+		let NewThat;
+		if(isFeatures == true){
+			NewThat = that.parentElement.querySelector('.product');
+			console.log(NewThat);
+		}else if(isFeatures == false){
+			NewThat = that.parentElement;	
+		}
+		console.log(NewThat);
+		updateAttributes(NewThat,productId,isFeatures,true);
+	}else if(isIcon == false){
+		console.log(that);
+		updateAttributes(that,productId,isFeatures,false);	
+	}
+	
+}
+
+function updateAttributes(that,productId,isFeatures,isIcon){
+	let currentThat;
+	if(isIcon == true){
+		if(isFeatures == true){
+			currentThat = that.closest('.item');	
+		}else if(isFeatures == false){
+			currentThat = that;
+		}	
+	}else{currentThat = that;}
+	console.log(currentThat);
 	let newOrder = {
 			id: productId,
-			size: that.getAttribute('data-selected-size'),
-			color: that.getAttribute('data-selected-color')
+			size: currentThat.getAttribute('data-selected-size'),
+			color: currentThat.getAttribute('data-selected-color')
 		};
-		if(that.getAttribute('data-favourite-type') == "add"){
-			favouriteProducts.push(newOrder);
-			updateFavouritesInLocalStorage();
-			that.setAttribute('data-favourite-type','delete');
-			if(isFeatures == true){
-				that.closest('.item').classList.add('favourited');	
-			}else if(isFeatures == false){
-				that.classList.add('favourited');	
-			}
-		}else if(that.getAttribute('data-favourite-type') == 'delete'){
-			favouriteProducts.pop(newOrder);
-			updateFavouritesInLocalStorage();
-			that.setAttribute('data-favourite-type','add');
-			if(isFeatures == true){
-				that.closest('.item').classList.remove('favourited');	
-			}else if(isFeatures == false){
-				that.classList.remove('favourited');	
-			}
+		
+	if(that.getAttribute('data-favourite-type') == "add"){
+		favouriteProducts.push(newOrder);
+		updateFavouritesInLocalStorage();
+		that.setAttribute('data-favourite-type','delete');
+		if(isFeatures == true){
+			let iconHeart = that.closest('.item').querySelector('.favouriteIcon');
+			iconHeart.classList.remove('fa-regular');
+			iconHeart.classList.add('fa-solid');
+			that.closest('.item').classList.add('favourited');	
+		}else if(isFeatures == false){
+			let iconHeart = that.querySelector('.favouriteIcon');
+			iconHeart.classList.remove('fa-regular');
+			iconHeart.classList.add('fa-solid');
+			that.classList.add('favourited');
 		}
+	}else if(that.getAttribute('data-favourite-type') == 'delete'){
+		favouriteProducts.pop(newOrder);
+		updateFavouritesInLocalStorage();
+		that.setAttribute('data-favourite-type','add');
+		if(isFeatures == true){
+			let iconHeart = that.closest('.item').querySelector('.favouriteIcon');
+			iconHeart.classList.add('fa-regular');
+			iconHeart.classList.remove('fa-solid');
+			that.closest('.item').classList.remove('favourited');	
+		}else if(isFeatures == false){
+			let iconHeart = that.querySelector('.favouriteIcon');
+			iconHeart.classList.add('fa-regular');
+			iconHeart.classList.remove('fa-solid');
+			console.log(that);
+			that.classList.remove('favourited');	
+		}
+	}
 }
 
 function removeFromCart(that,productId,typeOfProducts,popupName){
