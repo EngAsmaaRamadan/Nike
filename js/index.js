@@ -187,7 +187,7 @@ latest.forEach(function(product){
 						(isProductIntoCart == null)? 
 						`<button class="btn mainColor mainButton" onclick="addToCart(this,${product.id});toggleBtn(this,'remove');">Add To Cart</button>`
 						:
-						`<button class="btn mainColor mainButton remove" onclick="removeFromCart(this,${product.id});toggleBtn(this,'add');">Remove From Cart</button>`
+						`<button class="btn mainColor mainButton remove" onclick="removeFromCart(this,${product.id},'shop');toggleBtn(this,'add');">Remove From Cart</button>`
 						}
 
 					</div>

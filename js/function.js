@@ -109,10 +109,6 @@ function changeActive(that,productId = 0,x){
 		let currentActiveIndicator = that.parentElement.querySelector('.active');
 			currentActiveIndicator.classList.remove('active');
 			that.classList.add('active');
-			if(x == 1){console.log('it is indicator');}
-			console.log(that);
-			console.log(currentActiveIndicator);
-			console.log('====================');
 	}else{
 		let product = document.querySelector(`.product[data-product-id="${productId}"]`),
 			productOriginalData = getProduct(productId);;
@@ -134,7 +130,7 @@ function prepareIndicators(imagesList,isProductIntoCart = null){
 	let liElements = "";
 	imagesList.forEach(function(image,index){
 		liElements += `
-			<li class="mainButton ${(index == 0)? 'active' : ''}" onclick="changeSelectedImg(this,'${image}');changeActive(this,null,1);"></li>
+			<li class="mainButton ${(index == 0)? 'active' : ''}" onclick="changeSelectedImg(this,'${image}');changeActive(this,0,1);"></li>
 		`;
 	});
 
@@ -205,7 +201,7 @@ function showProduct(productId){
 						(isProductIntoCart == null)? 
 						`<button class="btn mainColor mainButton" onclick="addToCart(this,${currentProduct.id});toggleBtn(this,'remove');">Add To Cart</button>`
 						:
-						`<button class="btn mainColor mainButton remove" onclick="removeFromCart(this,${currentProduct.id});toggleBtn(this,'add');">Remove From Cart</button>`
+						`<button class="btn mainColor mainButton remove" onclick="removeFromCart(this,${currentProduct.id},'shop');toggleBtn(this,'add');">Remove From Cart</button>`
 					}						
 			</div>
 		</div>
@@ -256,7 +252,7 @@ function addToCart(that,productId){
 	cartProducts.push(newOrder);
 	updateordersInLocalStorage();
 	toggleBtn(that,'remove');
-	that.setAttribute('onclick',`removeFromCart(this,${productId})`);
+	that.setAttribute('onclick',`removeFromCart(this,${productId},'shop')`);
 }
 
 function addToFavouriteCart(that,productId,isFeatures){
@@ -292,7 +288,7 @@ function updateAttributes(that,productId,isFeatures,isIcon){
 	let currentThat;
 	if(isIcon == true){
 		if(isFeatures == true){
-			currentThat = that.closest('.item');	
+			currentThat = that.closest('.item').querySelector('.product');	
 		}else if(isFeatures == false){
 			currentThat = that;
 		}	
@@ -386,9 +382,10 @@ function updateWhenRemove(obj,isFeatures){//??????????
 
 function removeFromCartInPopup(that,productId,popupName){
 	if(popupName.includes('shop')){
-		let btnOfLatestCurrentProduct = document.querySelector(`.product[data-product-id='${productId}'] button`);
+		let btnOfLatestCurrentProduct = document.querySelector(`#latest .product[data-product-id='${productId}'] button`);
 		typeOfProducts = cartProducts;
-		removeFromCart(btnOfLatestCurrentProduct,productId,typeOfProducts,popupName);
+		console.log(btnOfLatestCurrentProduct);
+		removeFromCart(btnOfLatestCurrentProduct,productId,popupName);
 		if(cartProducts.length == 0){
 		console.log('hello');
 		let alert = document.querySelector(`.popup .alert.${popupName}`);
@@ -396,9 +393,7 @@ function removeFromCartInPopup(that,productId,popupName){
 		buyButton.classList.add('d-none');
 	}
 	}else if(popupName.includes('favourite')){
-		let btnOfLatestCurrentProduct = document.querySelector(`.product[data-product-id='${productId}'] button`);
 		typeOfProducts = favouriteProducts;
-		removeFromCart(btnOfLatestCurrentProduct,productId,typeOfProducts,popupName);
 		if(favouriteProducts.length == 0){
 		let alert = document.querySelector(`.popup .alert.${popupName}`);
 		alert.classList.remove('d-none');
@@ -409,13 +404,12 @@ function removeFromCartInPopup(that,productId,popupName){
 	
 }
 
-function removeFromCart(that,productId,typeOfProducts,popupName){
-	typeOfProducts = typeOfProducts.filter( (typeOfProduct) => typeOfProduct.id != productId);
+function removeFromCart(that,productId,popupName){
 	if(popupName.includes('shop')){
-		cartProducts = typeOfProducts;
+		cartProducts = cartProducts.filter( (cartProduct) => cartProduct.id != productId);
 		updateordersInLocalStorage();
 	}else if(popupName.includes('favourite')){
-		favouriteProducts = typeOfProducts;
+		favouriteProducts = favouriteProducts.filter( (favouriteProduct) => favouriteProduct.id != productId);
 		updateFavouritesInLocalStorage();
 	}
 	if(that != null && popupName.includes('shop')){
@@ -463,6 +457,7 @@ function showProductsInPopup(popupName,typeOfProducts){
 			typeOfProducts = favouriteProducts;
 		}
 		console.log(featuresIds);
+		console.log(typeOfProducts,favouriteProducts);
 	typeOfProducts.forEach(function(typeOfProduct){
 		let product = getProduct(typeOfProduct.id),
 			isFeatures = featuresIds.forEach(function(id){
