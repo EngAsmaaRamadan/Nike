@@ -110,7 +110,7 @@ function changeActive(that,productId = 0,x){
 			currentActiveIndicator.classList.remove('active');
 			that.classList.add('active');
 	}else{
-		let product = document.querySelector(`.popup.product[data-product-id="${productId}"]`),
+		let product = document.querySelector(`.popup .product[data-product-id="${productId}"]`),
 			productOriginalData = getProduct(productId);;
 		product.setAttribute('data-selected-size',productOriginalData.sizes[0]);
 		product.setAttribute('data-selected-color',productOriginalData.colors[0]);
