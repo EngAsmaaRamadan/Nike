@@ -104,14 +104,22 @@ function changeSelectedImg(that,imageName){
 	selectedImg.src = selectedImgNewSrc
 }
 
-function changeActive(that,productId = 0,x){
+function changeActive(that,productId = 0,isPopup){
 	if(productId == 0){
 		let currentActiveIndicator = that.parentElement.querySelector('.active');
 			currentActiveIndicator.classList.remove('active');
 			that.classList.add('active');
 	}else{
-		let product = document.querySelector(`.popup .product[data-product-id="${productId}"]`),
-			productOriginalData = getProduct(productId);;
+		let product;
+		if(isPopup != null){
+			product = document.querySelector(`.popup .product[data-product-id="${productId}"]`),
+			productOriginalData = getProduct(productId);	
+		}else{
+			product = document.querySelector(`.product[data-product-id="${productId}"]`),
+			productOriginalData = getProduct(productId);
+		}
+		
+		console.log(productId,product,productOriginalData);
 		product.setAttribute('data-selected-size',productOriginalData.sizes[0]);
 		product.setAttribute('data-selected-color',productOriginalData.colors[0]);
 		let currentActiveIndicators = product.querySelectorAll('li.active');
@@ -260,16 +268,16 @@ function addToFavouriteCart(that,productId,isFeatures){
 		iconAnimate;
 	console.log(isIcon,isFeatures);
 	if(isIcon == true){
-		let NewThat;
+		let product;
 		if(isFeatures == true){
-			NewThat = that.parentElement.querySelector('.product');
-			console.log(NewThat);
-			iconAnimate = NewThat.parentElement.querySelector('.heart');
+			product = that.parentElement.querySelector('.product');
+			console.log(product);
+			iconAnimate = product.parentElement.querySelector('.heart');
 			iconAnimate.classList.add('animate');
-			updateAttributes(NewThat,productId,isFeatures,true);
+			updateAttributes(product,productId,isFeatures,true);
 		}else if(isFeatures == false){
-			NewThat = that.parentElement;
-			updateAttributes(NewThat,productId,isFeatures,true);
+			product = that.parentElement;
+			updateAttributes(product,productId,isFeatures,true);
 		}
 		
 	}else if(isIcon == false){
@@ -415,7 +423,7 @@ function removeFromCart(that,productId,popupName){
 	if(that != null && popupName.includes('shop')){
 		toggleBtn(that,'add');
 		that.setAttribute('onclick',`addToCart(this,${productId})`);
-		changeActive(that,productId);
+		changeActive(that,productId,that.closest('.popup'));
 	}
 
 }
