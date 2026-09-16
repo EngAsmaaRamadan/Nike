@@ -4,6 +4,7 @@ nav.navbar{
     background: -webkit-linear-gradient(to right,rgba(234, 234, 234, 0.5),rgba(219, 219, 219, 0.5),rgba(242, 242, 242, 0.5),rgba(173, 169, 150, 0.5));
     background: linear-gradient(to right, rgba(234, 234, 234, 0.5), rgba(219, 219, 219, 0.5), rgba(242, 242, 242, 0.5), rgba(173, 169, 150, 0.5));
     box-shadow: 0 .5rem 1rem #0000001a;
+    z-index: 100;
 }
 
 nav.navbar.scrolled{

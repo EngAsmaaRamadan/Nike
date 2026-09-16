@@ -262,8 +262,7 @@ function addToCart(that,productId){
 function addToFavouriteCart(that,productId,isFeatures){
 	let isIcon = (that.className.includes('favouriteIcon') ? true : false),
 		iconAnimate;
-
-	console.log(isIcon);
+	console.log(isIcon,isFeatures);
 	if(isIcon == true){
 		let NewThat;
 		if(isFeatures == true){
@@ -271,18 +270,20 @@ function addToFavouriteCart(that,productId,isFeatures){
 			console.log(NewThat);
 			iconAnimate = NewThat.parentElement.querySelector('.heart');
 			iconAnimate.classList.add('animate');
+			updateAttributes(NewThat,productId,isFeatures,true);
 		}else if(isFeatures == false){
 			NewThat = that.parentElement;
+			updateAttributes(NewThat,productId,isFeatures,true);
 		}
-		console.log(NewThat);
-		updateAttributes(NewThat,productId,isFeatures,true);
+		
 	}else if(isIcon == false){
 		if(isFeatures == true){
 			iconAnimate = that.parentElement.querySelector('.heart');
 			iconAnimate.classList.add('animate');
+			updateAttributes(that,productId,isFeatures,false);
+		}else if(isFeatures == false){
+			updateAttributes(that,productId,isFeatures,false);
 		}
-		console.log(that);
-		updateAttributes(that,productId,isFeatures,false);	
 	}
 	
 }
@@ -312,7 +313,9 @@ function updateWhenAdd(that,newOrder,isFeatures){
 				updateFavouritesInLocalStorage();
 				that.setAttribute('data-favourite-type','delete');
 					if(isFeatures == true){
-						let iconHeart = that.closest('.item').querySelector('.favouriteIcon');
+						let iconHeart = that.closest('.item').querySelector('.favouriteIcon'),
+							heartAnimation = that.closest('.item').querySelector('.heart');
+						heartAnimation.classList.add('animate');
 						iconHeart.classList.remove('fa-regular');
 						iconHeart.classList.add('fa-solid');
 						that.closest('.item').classList.add('favourited');	
@@ -326,8 +329,11 @@ function updateWhenAdd(that,newOrder,isFeatures){
 			favouriteProducts.pop(newOrder);
 			updateFavouritesInLocalStorage();
 			that.setAttribute('data-favourite-type','add');
+
 			if(isFeatures == true){
-				let iconHeart = that.closest('.item').querySelector('.favouriteIcon');
+				let iconHeart = that.closest('.item').querySelector('.favouriteIcon'),
+						heartAnimation = that.closest('.item').querySelector('.heart');
+					heartAnimation.classList.remove('animate');
 				iconHeart.classList.add('fa-regular');
 				iconHeart.classList.remove('fa-solid');
 				that.closest('.item').classList.remove('favourited');	
@@ -335,8 +341,7 @@ function updateWhenAdd(that,newOrder,isFeatures){
 				let iconHeart = that.querySelector('.favouriteIcon');
 				iconHeart.classList.add('fa-regular');
 				iconHeart.classList.remove('fa-solid');
-				console.log(that);
-				that.classList.remove('favourited');	
+				that.classList.remove('favourited');
 			}
 		}
 }
@@ -348,7 +353,9 @@ function updateWhenRemove(obj,isFeatures){//??????????
 				
 			that.setAttribute('data-favourite-type','delete');
 				if(isFeatures == true){
-					let iconHeart = that.closest('.item').querySelector('.favouriteIcon');
+					let iconHeart = that.closest('.item').querySelector('.favouriteIcon'),
+						heartAnimation = that.closest('.item').querySelector('.heart');
+					heartAnimation.classList.add('animate');
 					iconHeart.classList.remove('fa-regular');
 					iconHeart.classList.add('fa-solid');
 					that.closest('.item').classList.add('favourited');	
@@ -362,7 +369,9 @@ function updateWhenRemove(obj,isFeatures){//??????????
 			
 			that.setAttribute('data-favourite-type','add');
 			if(isFeatures == true){
-				let iconHeart = that.closest('.item').querySelector('.favouriteIcon');
+				let iconHeart = that.closest('.item').querySelector('.favouriteIcon'),
+					heartAnimation = that.closest('.item').querySelector('.heart');
+				heartAnimation.classList.remove('animate');
 				iconHeart.classList.add('fa-regular');
 				iconHeart.classList.remove('fa-solid');
 				that.closest('.item').classList.remove('favourited');	
@@ -370,29 +379,34 @@ function updateWhenRemove(obj,isFeatures){//??????????
 				let iconHeart = that.querySelector('.favouriteIcon');
 				iconHeart.classList.add('fa-regular');
 				iconHeart.classList.remove('fa-solid');
-				console.log(that);
 				that.classList.remove('favourited');	
 			}
 		}
 }
 
 function removeFromCartInPopup(that,productId,popupName){
-	let btnOfLatestCurrentProduct = document.querySelector(`#Latest .product[data-product-id='${productId}'] button`);
 	if(popupName.includes('shop')){
+		let btnOfLatestCurrentProduct = document.querySelector(`.product[data-product-id='${productId}'] button`);
 		typeOfProducts = cartProducts;
-	}else if(popupName.includes('favourite')){
-		typeOfProducts = favouriteProducts;
-	}
-	removeFromCart(btnOfLatestCurrentProduct,productId,typeOfProducts,popupName);
-	that.parentElement.parentElement.parentElement.remove();
-	if(cartProducts.length == 0 || favouriteProducts.length == 0){
+		removeFromCart(btnOfLatestCurrentProduct,productId,typeOfProducts,popupName);
+		if(cartProducts.length == 0){
 		console.log('hello');
 		let alert = document.querySelector(`.popup .alert.${popupName}`);
 		alert.classList.remove('d-none');
-		if(popupName.includes('shop')){
-			buyButton.classList.add('d-none');
-		}
+		buyButton.classList.add('d-none');
 	}
+	}else if(popupName.includes('favourite')){
+		let btnOfLatestCurrentProduct = document.querySelector(`.product[data-product-id='${productId}'] button`);
+		typeOfProducts = favouriteProducts;
+		removeFromCart(btnOfLatestCurrentProduct,productId,typeOfProducts,popupName);
+		if(favouriteProducts.length == 0){
+		let alert = document.querySelector(`.popup .alert.${popupName}`);
+		alert.classList.remove('d-none');
+	}
+	}
+	
+	that.parentElement.parentElement.parentElement.remove();
+	
 }
 
 function removeFromCart(that,productId,typeOfProducts,popupName){

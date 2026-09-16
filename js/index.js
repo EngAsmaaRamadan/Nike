@@ -145,7 +145,7 @@ latest.forEach(function(product){
 	let isProductIntoCart = checkIfProductIntoCart(product.id),
 		isProductIntoFavouriteCart = checkIfProductIntoCart(product.id,favouriteProducts);
 	latestContent.innerHTML += `
-		<div class="product mainBorder rounded-3 pt-3 px-3 mb-3 position-relative ${(isProductIntoFavouriteCart != null) ? 'favourited' : ''}" ${(isProductIntoFavouriteCart != null) ? 'data-favourite-type="delete"' : 'data-favourite-type="add"' } ondblclick="addToFavouriteCart(this,${product.id});" data-selected-color="${isProductIntoCart?.color ?? product.colors[0]}" data-selected-size="${isProductIntoCart?.size ?? product.sizes[0]}" data-product-id="${product.id}" data-type="show">
+		<div class="product mainBorder rounded-3 pt-3 px-3 mb-3 position-relative ${(isProductIntoFavouriteCart != null) ? 'favourited' : ''}" ${(isProductIntoFavouriteCart != null) ? 'data-favourite-type="delete"' : 'data-favourite-type="add"' } ondblclick="addToFavouriteCart(this,${product.id},false);" data-selected-color="${isProductIntoCart?.color ?? product.colors[0]}" data-selected-size="${isProductIntoCart?.size ?? product.sizes[0]}" data-product-id="${product.id}" data-type="show">
 		<i class="${(isProductIntoFavouriteCart != null) ? 'fa-solid' : 'fa-regular'} fa-heart favouriteIcon" onclick="addToFavouriteCart(this,${product.id},false);"></i>
 			<div class="row">
 				<div class="col-lg-6 part1">
