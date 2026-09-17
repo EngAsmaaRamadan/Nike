@@ -447,6 +447,7 @@ function showProductsInPopup(popupName,typeOfProducts){
 	if(typeOfProducts.length == 0){
 		let alert = document.querySelector(`.popup .alert.${popupName}`);
 		alert.classList.remove('d-none');
+		shopDoneAlert.classList.add('d-none');
 		if(popupName.includes('shop')){
 			buyButton.classList.add('d-none');
 		}
@@ -522,6 +523,14 @@ function openPopup(popupName){
 
 function closePopup(){
 	let popup = document.querySelector(`.popup.active`);
+	popup.classList.remove('show');
+	setTimeout(function(){
+		popup.classList.remove('active');
+	},500);
+}
+
+function closePopupBuy(){//in case one more than another popup.active
+	let popup = document.querySelector(`.popup-buy.active`);
 	popup.classList.remove('show');
 	setTimeout(function(){
 		popup.classList.remove('active');
@@ -633,19 +642,32 @@ function scrollToFisrtExist(featuredProducts,latestProducts){
 
 function buyNow(that){
 	let popup = that.closest('.popup'),
-		products = popup.querySelectorAll('.product'),
 		totalPrice = 0;
-	products.forEach(function(product){
+	productsInPopupShop = popup.querySelectorAll('.product');
+	console.log(productsInPopupShop);
+	productsInPopupShop.forEach(function(product){
+		console.log(totalPrice)
 		totalPrice += Number(product.querySelector('.latestPrice').textContent);
 	});
 	console.log(totalPrice);
 	let popupBuy = document.querySelector('.popup[data-popup-name="buy"]'),
 		spanContent = popupBuy.querySelector('span'),
 		popupStatement = popupBuy.querySelector('.statement');
-	popupStatement.textContent = "Are you sure to buy this " + products.length + " products";
+	popupStatement.textContent = "Are you sure to buy this " + productsInPopupShop.length + " products";
 	spanContent.textContent = "Total price is " + totalPrice;
 	openPopup('buy');
-	
+}
+
+function confirmBuy(){
+	cartProducts = [];
+	updateordersInLocalStorage();
+	productsInPopupShop.forEach(function(product){
+		product.parentElement.parentElement.remove();
+	});
+	closePopupBuy();
+	buyButton.classList.add('d-none');
+	shopDoneAlert.classList.remove('d-none');
+	console.log(shopDoneAlert);
 }
 
 function updateordersInLocalStorage(){

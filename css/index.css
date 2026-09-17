@@ -540,7 +540,8 @@ ul.color li.color.active{
 	justify-content: space-between;
 }
 
-.popup-search .popup-box .no-result i.close{
+.popup-search .popup-box .no-result i.close,
+.popup-buy .popup-box i.close{
 	color:#C9C9C9;
 	font-size: 16px;
 }
@@ -556,4 +557,9 @@ ul.color li.color.active{
 
 .popup-search.show{
 	opacity: 1;
+}
+
+.popup-buy .popup-box{
+	background: #333333;
+	width: 400px;
 }

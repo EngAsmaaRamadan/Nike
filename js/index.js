@@ -16,9 +16,11 @@ let scCarousel = document.querySelector("#SC-Carousel"),
 	alert = document.querySelector('.popup[data-popup-name="shop"] .body .alert'),
 	navButton = document.querySelector('.navbar-toggler'),
 	buyButton = document.querySelector('.popup[data-popup-name="shop"] .body .buy'),
+	shopDoneAlert = document.querySelector('.alert.shop-done'),
 	navUlDiv = document.querySelector('.sc-collapse'),
 	cartProducts = [],
-	favouriteProducts = [];
+	favouriteProducts = [],
+	productsInPopupShop = [];
 
 //check scroll to remove opacity from nav when page loaded
 checkScrollNav();
