@@ -173,7 +173,7 @@ latest.forEach(function(product){
 				<div class="col-lg-6 part2">
 					<div class="item mb-4">
 						<h3 class="mainColor fw-normal">${product.name}</h3>
-						<p>${product.description}</p>
+						<p class="pe-1">${product.description}</p>
 						<div class="info d-flex mb-2">
 							<h6 class="price fw-bolder mb-0 me-3">Price :</h6>
 							${preparePrices(product.price,product.discount)}
@@ -204,7 +204,7 @@ features.forEach(function(product){
 	let isProductIntoCart = checkIfProductIntoCart(product.id),
 		isProductIntoFavouriteCart = checkIfProductIntoCart(product.id,favouriteProducts);
 	featuredContentRow.innerHTML += `
-		<div class="col-lg-3 part" data-type="show">
+		<div class="col-sm-6 col-lg-3 part" data-type="show">
 			<div class="item ${(isProductIntoFavouriteCart != null) ? 'favourited' : ''} position-relative">
 			<i class="${(isProductIntoFavouriteCart != null) ? 'fa-solid' : 'fa-regular'} fa-heart favouriteIcon" onclick="addToFavouriteCart(this,${product.id},true);"></i>
 		<i class="fa-solid fa-heart heart animating-heart"></i>

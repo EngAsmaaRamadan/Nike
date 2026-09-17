@@ -477,7 +477,7 @@ function showProductsInPopup(popupName,typeOfProducts){
 			});
 			isFeatures = (isFeatures != true) ? false : true ;
 		productsContent.innerHTML += `
-			<div class="col-lg-4">
+			<div class="col-sm-6 col-lg-4">
 				<div class="item text-start">
 					<div class="product">
 						<img src="images/products/${product.images[0]}" alt="products" class="img-fluid">
