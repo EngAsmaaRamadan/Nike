@@ -7,6 +7,10 @@ nav.navbar{
     z-index: 100;
 }
 
+nav.navbar .container{
+	overflow: hidden;
+}
+
 nav.navbar.scrolled{
 	background: #ada996;
     background: -webkit-linear-gradient(to right,#eaeaea,#dbdbdb,#f2f2f2,#ada996);
@@ -33,7 +37,7 @@ nav.navbar .navbar-toggler span{
 	background-color: var(--main-color);
 }
 
-nav .sc-collapse{
+nav .collapse{
 	display: flex;
     justify-content: space-around;
 	align-items: center;

@@ -17,7 +17,7 @@ let scCarousel = document.querySelector("#SC-Carousel"),
 	navButton = document.querySelector('.navbar-toggler'),
 	buyButton = document.querySelector('.popup[data-popup-name="shop"] .body .buy'),
 	shopDoneAlert = document.querySelector('.alert.shop-done'),
-	navUlDiv = document.querySelector('.sc-collapse'),
+	navUlDiv = document.querySelector('.collapse'),
 	cartProducts = [],
 	favouriteProducts = [],
 	productsInPopupShop = [];
