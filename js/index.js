@@ -153,14 +153,14 @@ latest.forEach(function(product){
 				<div class="col-lg-6 part1">
 					<div class="item">
 						<div class="row">
-							<div class="col-lg-2">
+							<div class="col-md-2">
 								<div class="item">
 									<ul class="list-unstyled d-flex column-gap-2 flex-md-column row-gap-md-2">
 										${prepareImagesList(product.images)}
 									</ul>
 								</div>
 							</div>
-							<div class="col-lg-10">
+							<div class="col-md-10">
 								<div class="item h-100">
 									<div class="h-100 selectedImgDiv">
 										<img src="images/products/${product.images[0]}" class="selectedImg" alt="products">
@@ -173,7 +173,7 @@ latest.forEach(function(product){
 				<div class="col-lg-6 part2">
 					<div class="item mb-4">
 						<h3 class="mainColor fw-normal">${product.name}</h3>
-						<p class="pe-1">${product.description}</p>
+						<p class="pe-1 pe-md-3">${product.description}</p>
 						<div class="info d-flex mb-2">
 							<h6 class="price fw-bolder mb-0 me-3">Price :</h6>
 							${preparePrices(product.price,product.discount)}
