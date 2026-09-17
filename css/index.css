@@ -561,7 +561,7 @@ ul.color li.color.active{
 	opacity: 1;
 }
 
-.popup-buy .popup-box{
+.popup.popup-buy .popup-box{
 	background: #333333;
 	width: 400px;
 }

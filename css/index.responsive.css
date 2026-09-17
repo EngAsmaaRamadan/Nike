@@ -15,6 +15,7 @@
 	} 
 
 	nav .collapse{
+		margin-top: 8px;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -26,10 +27,6 @@
     	background: linear-gradient(to right, #eaeaea, #dbdbdb, #f2f2f2, #ada996);
     	height: 0%;
     	padding: 0;
-        /*position: absolute;
-        top: 100%;
-        transform: translate(-50%, 5%);
-        left: 50%;*/
         width: 90%;
         overflow: hidden;
 	}
@@ -194,8 +191,8 @@
 		width: 80%;
 	}
 
-	.popup-search .popup-box{
-		width: 300px;
+	.popup.popup-buy .popup-box {
+	    width: 300px;
 	}
 }
 
@@ -204,11 +201,27 @@
         width: 20%;
     }
 
+    nav .collapse{
+    	margin-top: 0;
+    }
+
+    header {
+        padding-top: 12px;
+    }
+
     #SC-Carousel{
 		padding-top: 48px;
 	}
 
-	
+	.popup[data-popup-name="shop"] .popup-box, .popup[data-popup-name="favourite"] .popup-box{
+		width: 78%;
+	}
+
+	.popup[data-popup-name="shop"] .popup-box .item, .popup[data-popup-name="favourite"] .popup-box .item {
+        width: 300px;
+    }
+
+    
 }
 
 @media (min-width: 577px) and (max-width: 1300px) {
@@ -216,7 +229,9 @@
 }
 
 @media (min-width: 769px) and (max-width: 1300px) {
-    
+    .popup.popup-buy .popup-box {
+        width: 400px;
+    }
 }
 
 @media (min-width: 992px) and (max-width: 1300px) {
