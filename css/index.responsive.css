@@ -354,11 +354,38 @@
 	}
 
 	nav .collapse{
-		width: 100%;
-		display: flex;
+	    width: initial;
+	    height: initial;
+	    display: flex;
+	    flex-direction: row;
 	    justify-content: space-around;
-	    align-items: center;
+	    background: transparent;
+	    border-radius: 0;
 	}
+
+	nav.navbar .navbar-brand {
+        width: 8%;
+    }
+
+    #Latest .product {
+        width: initial;
+    }
+
+    #Featured .content .item {
+        width: initial;
+    }
+
+    #Featured .content .body h6{
+    	font-size: 15px;
+    }
+
+    .popup[data-popup-name="shop"] .popup-box, .popup[data-popup-name="favourite"] .popup-box {
+        width: 750px;
+    }
+
+    .popup[data-popup-name="product"] .popup-box .part2 h3 {
+        font-size: 28px;
+    }
 }
 
 @media (min-width: 1181px) and (max-width: 1300px) {
