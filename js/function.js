@@ -50,7 +50,7 @@ function preparePrices(price,discount){
 	let newPrice = price * (1 - discount);
 	return `
 		<p class="value mb-0">
-			<span class="text-decoration-line-through mainColor ${(discount == 0) ? 'd-none' : '' }">${price} <sup>$</sup></span> <span class="fw-semibold">${ (Number.isInteger(newPrice) ) ? (newPrice) : newPrice.toFixed(2) } <sup>$</sup></span>
+			<span class="text-decoration-line-through mainColor ${(discount == 0) ? 'd-none' : '' }">${price} <sup>$</sup></span> <span class="fw-semibold"><span class="latestPrice"> ${ (Number.isInteger(newPrice) ) ? (newPrice) : newPrice.toFixed(2) }</span> <sup>$</sup></span>
 		</p>
 	`;
 }
@@ -629,6 +629,23 @@ function scrollToFisrtExist(featuredProducts,latestProducts){
 		}
 	}
 	window.scrollTo(0,topOfFirstMatch);
+}
+
+function buyNow(that){
+	let popup = that.closest('.popup'),
+		products = popup.querySelectorAll('.product'),
+		totalPrice = 0;
+	products.forEach(function(product){
+		totalPrice += Number(product.querySelector('.latestPrice').textContent);
+	});
+	console.log(totalPrice);
+	let popupBuy = document.querySelector('.popup[data-popup-name="buy"]'),
+		spanContent = popupBuy.querySelector('span'),
+		popupStatement = popupBuy.querySelector('.statement');
+	popupStatement.textContent = "Are you sure to buy this " + products.length + " products";
+	spanContent.textContent = "Total price is " + totalPrice;
+	openPopup('buy');
+	
 }
 
 function updateordersInLocalStorage(){
