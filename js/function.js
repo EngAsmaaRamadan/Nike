@@ -181,7 +181,7 @@ function showProduct(productId){
 						${prepareSizeList(currentProduct.sizes,isProductIntoCart)}
 					</ul>
 				</div>
-				<div class="info d-flex">
+				<div class="info d-flex mb-2">
 					<h6 class="color fw-bolder mb-0 me-3">Color  :</h6>
 					<ul class="list-unstyled d-flex column-gap-2 mb-2 color">
 						${prepareColorList(currentProduct.colors,isProductIntoCart)}
@@ -481,7 +481,7 @@ function showProductsInPopup(popupName,typeOfProducts){
 				<div class="item text-start">
 					<div class="product">
 						<img src="images/products/${product.images[0]}" alt="products" class="img-fluid">
-						<h4 class="fw-normal">${(product.name).slice(0,14)}...</h4>
+						<h4 class="fw-normal mb-3">${(product.name).slice(0,14)}...</h4>
 						
 						<div class="info d-flex mb-2">
 							<h6 class="price fw-bolder mb-0 me-3">Price :</h6>

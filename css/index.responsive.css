@@ -31,6 +31,10 @@
         overflow: hidden;
 	}
 
+	nav ul.navbar-nav {
+        row-gap: 8px;
+    }
+
 	nav .collapse.active{
 		display: flex;
 		/*padding: 16px 24px;*/
@@ -225,11 +229,23 @@
         width: 300px;
     }
 
-    
+    .popup[data-popup-name="product"] .popup-box .part2 h3 {
+        font-size: 24px;
+    }
+
+    .popup[data-popup-name="login"] .popup-box {
+        width: 350px;
+    }
 }
 
 @media (min-width: 577px) and (max-width: 1300px) {
-    
+    .popup-search .popup-box {
+        width: 350px;
+    }
+
+    .popup-buy .popup-box {
+        width: 350px;
+    }
 }
 
 @media (min-width: 769px) and (max-width: 1300px) {
