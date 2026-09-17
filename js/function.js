@@ -142,29 +142,12 @@ function prepareIndicators(imagesList,isProductIntoCart = null){
 		`;
 	});
 
-
-
-	// if(isProductIntoCart == null){
-	// 	imagesList.forEach(function(image,index){
-	// 	liElements += `
-	// 		<li class="mainButton ${(index == 0)? 'active' : ''}" onclick="changeActive(this);updateSelectedSize(this,'${image}');">${image}</li>
-	// 	`;
-	// 	});
-	// }else{
-	// 	imagesList.forEach(function(image){
-	// 	liElements += `
-	// 		<li class="mainButton ${(image == isProductIntoCart.image)? 'active' : ''}" onclick="changeActive(this);updateSelectedSize(this,'${image}');">${image}</li>
-	// 	`;
-	// 	});
-	// }
-
-
 	return liElements;
 }
 
-function updateSelectedIndicators(that,indicator){
+// function updateSelectedIndicators(that,indicator){
 
-}
+// }
 
 function showProduct(productId){
 	let isProductIntoCart = checkIfProductIntoCart(productId),
@@ -350,9 +333,9 @@ function updateWhenAdd(that,newOrder,isFeatures){
 		}
 }
 
-function updateWhenRemove(obj,isFeatures){//??????????
-	let product = document.querySelector(`.product[data-product-id="${obj.id}"]`),
-		that = product;
+function updateWhenRemove(that,isFeatures){//??????????
+	console.log(that);
+	console.log('before remove favourite');
 		if(that.getAttribute('data-favourite-type') == "add"){
 				
 			that.setAttribute('data-favourite-type','delete');
@@ -370,16 +353,19 @@ function updateWhenRemove(obj,isFeatures){//??????????
 					that.classList.add('favourited');
 				}
 		}else if(that.getAttribute('data-favourite-type') == 'delete'){
-			
+			console.log('when deleting',isFeatures);
 			that.setAttribute('data-favourite-type','add');
 			if(isFeatures == true){
+				console.log('when deleting on true');
 				let iconHeart = that.closest('.item').querySelector('.favouriteIcon'),
 					heartAnimation = that.closest('.item').querySelector('.heart');
 				heartAnimation.classList.remove('animate');
 				iconHeart.classList.add('fa-regular');
 				iconHeart.classList.remove('fa-solid');
-				that.closest('.item').classList.remove('favourited');	
+				that.closest('.item').classList.remove('favourited');
+				console.log('done remove favourite');
 			}else if(isFeatures == false){
+				console.log('when deleting on false');
 				let iconHeart = that.querySelector('.favouriteIcon');
 				iconHeart.classList.add('fa-regular');
 				iconHeart.classList.remove('fa-solid');
@@ -388,7 +374,7 @@ function updateWhenRemove(obj,isFeatures){//??????????
 		}
 }
 
-function removeFromCartInPopup(that,productId,popupName){
+function removeFromCartInPopup(that,productId,popupName,isFeatures){//update fav?????
 	console.log('hello from removeFromCartInPopup',popupName);
 	if(popupName.includes('shop')){
 		let btnOfLatestCurrentProduct = document.querySelector(`#latest .product[data-product-id='${productId}'] button`);
@@ -401,7 +387,14 @@ function removeFromCartInPopup(that,productId,popupName){
 		buyButton.classList.add('d-none');
 	}
 	}else if(popupName.includes('favourite')){
-		removeFromCart(null,productId,popupName);
+		let product = document.querySelector(`.product[data-product-id="${productId}"]`);
+		if(isFeatures == true){
+			updateWhenRemove(product,true);
+		}else if(isFeatures == false){
+			updateWhenRemove(product,false);
+		}
+
+		removeFromCart(that,productId,popupName);
 		if(favouriteProducts.length == 0){
 			let alert = document.querySelector(`.popup .alert.${popupName}`);
 			alert.classList.remove('d-none');
@@ -409,16 +402,13 @@ function removeFromCartInPopup(that,productId,popupName){
 			let alert = document.querySelector(`.popup .alert.${popupName}`);
 			alert.classList.add('d-none');
 		}
-		
-	
-	
 	}
 	
 	that.parentElement.parentElement.parentElement.remove();
 	
 }
 
-function removeFromCart(that,productId,popupName){
+function removeFromCart(that,productId,popupName,x = 1){
 	console.log('in fn removeFromCart',popupName,that);
 	if(popupName.includes('shop')){
 		cartProducts = cartProducts.filter( (cartProduct) => cartProduct.id != productId);
@@ -426,6 +416,7 @@ function removeFromCart(that,productId,popupName){
 	}else if(popupName.includes('favourite')){
 		favouriteProducts = favouriteProducts.filter( (favouriteProduct) => favouriteProduct.id != productId);
 		updateFavouritesInLocalStorage();
+
 	}
 	if(that != null && popupName.includes('shop')){
 		toggleBtn(that,'add');
@@ -475,13 +466,14 @@ function showProductsInPopup(popupName,typeOfProducts){
 		console.log(typeOfProducts,favouriteProducts);
 	typeOfProducts.forEach(function(typeOfProduct){
 		let product = getProduct(typeOfProduct.id),
-			isFeatures = featuresIds.forEach(function(id){
+			cur_product = document.querySelector(`.product[data-product-id="${product.id}"]`),
+			isFeatures;
+			featuresIds.forEach(function(id){
 				if(typeOfProduct.id == id){
-					return true;
+					isFeatures = true;
 				}
 			});
-			console.log(typeOfProduct);
-		updateWhenRemove(typeOfProduct,isFeatures);
+			console.log(isFeatures);
 		productsContent.innerHTML += `
 			<div class="col-lg-4">
 				<div class="item text-start">
@@ -507,7 +499,7 @@ function showProductsInPopup(popupName,typeOfProducts){
 							</ul>
 
 						</div>
-						<button class="btn btn-danger w-100 mt-3" onclick="removeFromCartInPopup(this,${product.id},'${popupName}');">Remove</button>
+						<button class="btn btn-danger w-100 mt-3" onclick="removeFromCartInPopup(this,${product.id},'${popupName}',${isFeatures});">Remove</button>
 					</div>
 				</div>
 			</div>
