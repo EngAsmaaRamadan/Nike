@@ -389,6 +389,22 @@
 }
 
 @media (min-width: 1181px) and (max-width: 1300px) {
+	header #SC-Carousel .SC-Carousel-inner .SC-Carousel-item .row .part2 img:nth-of-type(2){
+		width: 105%;
+	}
+
+	header #SC-Carousel .SC-Carousel-inner .SC-Carousel-item.active .row .part2 img:nth-of-type(2) {
+        transform: translate(-42%, -50%) rotate(-35deg) scale(1.0);
+    }
+
+    header #SC-Carousel .SC-Carousel-inner .SC-Carousel-item.active .row .part2 img:nth-of-type(1) {
+        transform: translate(-15%, -15%);
+    }
+
+    header #SC-Carousel .SC-Carousel-inner .SC-Carousel-item.active .row .part2 img:nth-of-type(1) {
+        transform: translate(-15%, 18%);
+    }
+
     .popup.popup-buy .popup-box{
 		width: 500px;
 	}
