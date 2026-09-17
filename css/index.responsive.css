@@ -62,7 +62,7 @@
 
 	nav.navbar ul.icons {
 	    position: relative;
-	    transform: translate(30%, 10px);
+	    transform: translate(15%, 10px);
 	}
 
     .title img {
@@ -73,8 +73,16 @@
 		padding-top: 24px;
 	}
 
-	header #SC-Carousel .SC-Carousel-inner .SC-Carousel-item.active .row .part2 img:nth-of-type(1){
+	header{
+		padding-top: 30px;
+	}
+
+	header #SC-Carousel .SC-Carousel-inner .SC-Carousel-item .row .part2 img:nth-of-type(1){
 		width: 50%;
+		transform: translate(18%, -15%);
+	}
+
+	header #SC-Carousel .SC-Carousel-inner .SC-Carousel-item.active .row .part2 img:nth-of-type(1){
 		transform: translate(18%, 15%);
 	}
 
@@ -96,9 +104,15 @@
 		margin-block: 15px;
 	}
 
-	header #SC-Carousel .SC-Carousel-inner .SC-Carousel-item.active .row .part2 img:nth-of-type(2){
+	header #SC-Carousel .SC-Carousel-inner .SC-Carousel-item .row .part2 img:nth-of-type(2){
+		transform: translate(-42%, -54%) scale(0.5);
 		width: 65%;
-		transform: translate(-50%, -54%) rotate(-35deg) scale(1.0);
+		transition-duration: 1s;
+	}
+
+	header #SC-Carousel .SC-Carousel-inner .SC-Carousel-item.active .row .part2 img:nth-of-type(2){
+		
+		transform: translate(-50%, -54%) rotate(-35deg) scale(1);
 	}
 
 	#Latest .product{
@@ -124,6 +138,10 @@
 		bottom: 5%;
 	}
 
+	#Featured .content .item:hover .head i{
+		bottom: 16%;
+	}
+
 	#Featured .content .item .head ul.indicators{
 		bottom: -20%;
 	}
@@ -147,7 +165,37 @@
 	.popup[data-popup-name="product"] .popup-box{
 		display: block;
         width: 280px;
-        margin: 20px auto;
+        margin:30px auto;
+	}
+
+	.popup[data-popup-name="product"] .popup-box .part2 h3{
+		font-size: 20px;
+	}
+
+	.popup[data-popup-name="shop"] .popup-box .item, .popup[data-popup-name="favourite"] .popup-box .item{
+		width: 235px;
+		margin: auto;
+	}
+
+	.popup[data-popup-name="shop"] .popup-box, .popup[data-popup-name="favourite"] .popup-box {
+	    margin: 30px auto;
+	}
+
+	.popup[data-popup-name="product"] .popup-box{
+		position: absolute;
+		top: 0;
+	}
+
+	.popup[data-popup-name="product"] .popup-box .row .part2{
+		padding-inline: 10px;
+	}
+
+	.popup[data-popup-name="shop"] .popup-box, .popup[data-popup-name="favourite"] .popup-box, .popup[data-popup-name="product"] .popup-box{
+		width: 80%;
+	}
+
+	.popup-search .popup-box{
+		width: 300px;
 	}
 }
 

@@ -168,7 +168,7 @@ function showProduct(productId){
 				</div>
 			</div>
 		</div>
-		<div class="col-lg-6">
+		<div class="col-lg-6 part2">
 			<div class="item">
 				<h3 class="mb-3">${currentProduct.name}</h3>
 				${preparePrices(currentProduct.price,currentProduct.discount)}
@@ -481,7 +481,7 @@ function showProductsInPopup(popupName,typeOfProducts){
 				<div class="item text-start">
 					<div class="product">
 						<img src="images/products/${product.images[0]}" alt="products" class="img-fluid">
-						<h4>${(product.name).slice(0,14)}...</h4>
+						<h4 class="fw-normal">${(product.name).slice(0,14)}...</h4>
 						
 						<div class="info d-flex mb-2">
 							<h6 class="price fw-bolder mb-0 me-3">Price :</h6>
