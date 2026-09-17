@@ -300,6 +300,10 @@
     .popup.popup-buy .popup-box {
         width: 400px;
     }
+
+    #Featured .content .item {
+        width: 280px;
+    }
 }
 
 @media (min-width: 992px) and (max-width: 1300px) {
