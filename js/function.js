@@ -389,9 +389,9 @@ function updateWhenRemove(obj,isFeatures){//??????????
 }
 
 function removeFromCartInPopup(that,productId,popupName){
+	console.log('hello from removeFromCartInPopup',popupName);
 	if(popupName.includes('shop')){
 		let btnOfLatestCurrentProduct = document.querySelector(`#latest .product[data-product-id='${productId}'] button`);
-		typeOfProducts = cartProducts;
 		console.log(btnOfLatestCurrentProduct);
 		removeFromCart(btnOfLatestCurrentProduct,productId,popupName);
 		if(cartProducts.length == 0){
@@ -401,11 +401,17 @@ function removeFromCartInPopup(that,productId,popupName){
 		buyButton.classList.add('d-none');
 	}
 	}else if(popupName.includes('favourite')){
-		typeOfProducts = favouriteProducts;
+		removeFromCart(null,productId,popupName);
 		if(favouriteProducts.length == 0){
-		let alert = document.querySelector(`.popup .alert.${popupName}`);
-		alert.classList.remove('d-none');
-	}
+			let alert = document.querySelector(`.popup .alert.${popupName}`);
+			alert.classList.remove('d-none');
+		}else{
+			let alert = document.querySelector(`.popup .alert.${popupName}`);
+			alert.classList.add('d-none');
+		}
+		
+	
+	
 	}
 	
 	that.parentElement.parentElement.parentElement.remove();
@@ -413,6 +419,7 @@ function removeFromCartInPopup(that,productId,popupName){
 }
 
 function removeFromCart(that,productId,popupName){
+	console.log('in fn removeFromCart',popupName,that);
 	if(popupName.includes('shop')){
 		cartProducts = cartProducts.filter( (cartProduct) => cartProduct.id != productId);
 		updateordersInLocalStorage();
