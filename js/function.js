@@ -391,6 +391,7 @@ function removeFromCartInPopup(that,productId,popupName,isFeatures){//update fav
 		if(isFeatures == true){
 			updateWhenRemove(product,true);
 		}else if(isFeatures == false){
+			console.log('it is latest');
 			updateWhenRemove(product,false);
 		}
 
@@ -408,7 +409,7 @@ function removeFromCartInPopup(that,productId,popupName,isFeatures){//update fav
 	
 }
 
-function removeFromCart(that,productId,popupName,x = 1){
+function removeFromCart(that,productId,popupName){
 	console.log('in fn removeFromCart',popupName,that);
 	if(popupName.includes('shop')){
 		cartProducts = cartProducts.filter( (cartProduct) => cartProduct.id != productId);
@@ -473,7 +474,7 @@ function showProductsInPopup(popupName,typeOfProducts){
 					isFeatures = true;
 				}
 			});
-			console.log(isFeatures);
+			isFeatures = (isFeatures != true) ? false : true ;
 		productsContent.innerHTML += `
 			<div class="col-lg-4">
 				<div class="item text-start">
