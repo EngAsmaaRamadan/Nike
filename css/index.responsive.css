@@ -191,6 +191,10 @@
 		width: 80%;
 	}
 
+	.popup-search .popup-box {
+    	width: 300px;
+    }
+
 	.popup.popup-buy .popup-box {
 	    width: 300px;
 	}
@@ -229,6 +233,10 @@
 }
 
 @media (min-width: 769px) and (max-width: 1300px) {
+    .popup-search .popup-box {
+    	width: 400px;
+    }
+
     .popup.popup-buy .popup-box {
         width: 400px;
     }
@@ -249,5 +257,11 @@
 }
 
 @media (min-width: 1181px) and (max-width: 1300px) {
-    
+    .popup.popup-buy .popup-box{
+		width: 500px;
+	}
+
+	.popup-search .popup-box{
+		width: 500px;
+	}
 }

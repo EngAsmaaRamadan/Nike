@@ -525,7 +525,7 @@ ul.color li.color.active{
 }
 
 .popup-search .popup-box{
-	width: 450px;
+	width: 500px;
 	position: absolute;
 	background: #333333;
     top: 50%;
@@ -563,5 +563,5 @@ ul.color li.color.active{
 
 .popup.popup-buy .popup-box{
 	background: #333333;
-	width: 400px;
+	width: 500px;
 }
