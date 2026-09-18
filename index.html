@@ -18,7 +18,7 @@
 </head>
 <body>
 
-	<nav class="navbar navbar-expand-lg position-fixed"><!--problem that nav take part of header done by add pt-->
+	<nav class="navbar navbar-expand-lg position-fixed">
 	  <div class="container">
 	  	<a class="navbar-brand" href="#">
 	    		<img src="images/first-logo.png" alt="first-logo logo navbar" class="img-fluid" id="Logo">
@@ -28,7 +28,10 @@
 	      <span></span>
 	      <span></span>
 	    </button>
+		
 	    <div class="navbar-collapse collapse mt-2" id="navbarSupportedContent">
+	    	<div class="icons-search-links">
+	    	<div class="nav-link-and-search-content">
 	      <ul class="navbar-nav mb-2 column-gap-3">
 	        <li class="nav-item active">
 	          <a class="nav-link" aria-current="page" href="#Home">Home</a>
@@ -45,12 +48,17 @@
 		        	<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
 		        	<button class="btn search" onclick="search(this);">Search</button>
 		        </div>
+		        </div>
 
+		<div class="icons-content">
 	      <ul class="list-unstyled icons column-gap-3 mb-0">
 	      	<li><i class="fa-solid fa-heart" onclick="showProductsInPopup('favourite',favouriteProducts);openPopup('favourite');"></i></li>
 	      	<li><i class="fa-solid fa-cart-shopping" onclick="showProductsInPopup('shop',cartProducts);"></i></li>
 	      	<li><i class="fa-solid fa-user" onclick="openPopup('login');"></i></li>
 	      </ul>
+	      </div>
+</div>
+
 	    </div>
 	  </div>
 	</nav>

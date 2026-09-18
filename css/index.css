@@ -33,6 +33,24 @@ nav.navbar .navbar-toggler span{
 	background-color: var(--main-color);
 }
 
+.icons-search-links{
+	width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-link-and-search-content{
+	display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.icons-content{
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 nav .collapse{
 	display: flex;
     justify-content: space-around;
