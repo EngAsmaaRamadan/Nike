@@ -234,7 +234,8 @@ function addToCart(that,productId){
 		newOrder = {
 			id: productId,
 			size: product.getAttribute('data-selected-size'),
-			color: product.getAttribute('data-selected-color')
+			color: product.getAttribute('data-selected-color'),
+			selectedImgSrc: product.querySelector('img.selectedImg').src,
 		};
 	cartProducts.push(newOrder);
 	updateordersInLocalStorage();
@@ -284,7 +285,8 @@ function updateAttributes(that,productId,isFeatures,isIcon){
 	let newOrder = {
 			id: productId,
 			size: currentThat.getAttribute('data-selected-size'),
-			color: currentThat.getAttribute('data-selected-color')
+			color: currentThat.getAttribute('data-selected-color'),
+			selectedImgSrc: currentThat.querySelector('img.selectedImg').src,
 		};
 		updateWhenAdd(that,newOrder,isFeatures);
 		
@@ -463,8 +465,10 @@ function showProductsInPopup(popupName,typeOfProducts){
 		console.log(featuresIds);
 		console.log(typeOfProducts,favouriteProducts);
 	typeOfProducts.forEach(function(typeOfProduct){
-		let product = getProduct(typeOfProduct.id),
-			cur_product = document.querySelector(`.product[data-product-id="${product.id}"]`),
+		let product = getProduct(typeOfProduct.id);
+		console.log(product);
+			let cur_product = document.querySelector(`.popup[data-popup-name="product"] .product[data-product-id="${product.id}"]`),
+			cur_productSelectedImgSrc = typeOfProduct.selectedImgSrc,
 			isFeatures;
 			featuresIds.forEach(function(id){
 				if(typeOfProduct.id == id){
@@ -476,7 +480,7 @@ function showProductsInPopup(popupName,typeOfProducts){
 			<div class="col-sm-6 col-md-4">
 				<div class="item text-start">
 					<div class="product">
-						<img src="images/products/${product.images[0]}" alt="products" class="img-fluid">
+						<img src="${cur_productSelectedImgSrc}" alt="products" class="img-fluid">
 						<h4 class="fw-normal mb-3">${(product.name).slice(0,14)}...</h4>
 						
 						<div class="info d-flex mb-2">
