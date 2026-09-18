@@ -145,10 +145,6 @@ function prepareIndicators(imagesList,isProductIntoCart = null){
 	return liElements;
 }
 
-// function updateSelectedIndicators(that,indicator){
-
-// }
-
 function showProduct(productId){
 	let isProductIntoCart = checkIfProductIntoCart(productId),
 		popupProductContent = document.querySelector('.popup[data-popup-name="product"] .popup-box'),
@@ -333,7 +329,7 @@ function updateWhenAdd(that,newOrder,isFeatures){
 		}
 }
 
-function updateWhenRemove(that,isFeatures){//??????????
+function updateWhenRemove(that,isFeatures){
 	console.log(that);
 	console.log('before remove favourite');
 		if(that.getAttribute('data-favourite-type') == "add"){
@@ -374,7 +370,7 @@ function updateWhenRemove(that,isFeatures){//??????????
 		}
 }
 
-function removeFromCartInPopup(that,productId,popupName,isFeatures){//update fav?????
+function removeFromCartInPopup(that,productId,popupName,isFeatures){
 	console.log('hello from removeFromCartInPopup',popupName);
 	if(popupName.includes('shop')){
 		let btnOfLatestCurrentProduct = document.querySelector(`#latest .product[data-product-id='${productId}'] button`);
@@ -538,10 +534,9 @@ function closePopupBuy(){//in case one more than another popup.active
 }
 
 function search(searchButton){
-	let allProductsHidden = document.querySelectorAll('.d-none[data-type="hide"]');
+	let allProductsHidden = document.querySelectorAll('[data-type="hide"]');
 	if(allProductsHidden.length > 0){
 		allProductsHidden.forEach(function(product){
-			product.classList.remove('d-none');
 			product.setAttribute('data-type','show');
 		});
 	}
@@ -581,12 +576,10 @@ function hideAllNotMatchedProducts(existedIds){
 		notMatchedProducts.forEach(function(notMatchedProduct){
 			if(latest.includes(notMatchedProduct)){
 				let currentRemoveLatestProduct = document.querySelector(`.product[data-product-id="${notMatchedProduct.id}"]`);
-				currentRemoveLatestProduct.classList.add('d-none');
 				currentRemoveLatestProduct.setAttribute('data-type','hide');
-			}else{
+			}else if(features.includes(notMatchedProduct)){
 				let currentRemoveFeaturesProduct = document.querySelector(`.product[data-product-id="${notMatchedProduct.id}"]`);
 				let currentRemoveProduct = currentRemoveFeaturesProduct.parentElement.parentElement;
-				currentRemoveProduct.classList.add('d-none');
 				currentRemoveProduct.setAttribute('data-type','hide');
 			}
 		});
