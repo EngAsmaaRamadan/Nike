@@ -149,6 +149,7 @@ function showProduct(productId){
 	let isProductIntoCart = checkIfProductIntoCart(productId),
 		popupProductContent = document.querySelector('.popup[data-popup-name="product"] .popup-box'),
 		currentProduct = getProduct(productId);
+		
 	popupProductContent.innerHTML = `
 		<div class="product" data-product-id="${productId}" data-selected-color="${isProductIntoCart?.color ?? currentProduct.colors[0]}" data-selected-size="${isProductIntoCart?.size ?? currentProduct.sizes[0]}">
 			<div class="row">
@@ -197,6 +198,14 @@ function showProduct(productId){
 
 		
 	`;
+	let popupProduct = document.querySelector('.popup[data-popup-name="product"] .popup-box .product'),
+		selectedImgInPopup = popupProductContent.querySelector('img.selectedImg');
+	cartProducts.forEach(function(cartProduct){
+		if(cartProduct.id == popupProduct.getAttribute('data-product-id')){
+			selectedImgInPopup.src = cartProduct.selectedImgSrc;
+			return;
+		}
+	});
 	openPopup('product');
 }
 

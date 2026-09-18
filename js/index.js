@@ -25,6 +25,7 @@ let scCarousel = document.querySelector("#SC-Carousel"),
 //check scroll to remove opacity from nav when page loaded
 checkScrollNav();
 
+
 if(localStorage.getItem('cartProducts') == null){
 	updateordersInLocalStorage();
 }else{
