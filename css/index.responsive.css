@@ -142,10 +142,6 @@
 		bottom: 16%;
 	}
 
-	#Featured .content .item .head ul.indicators{
-		bottom: -20%;
-	}
-
 	footer p {
 	    padding-block: 7px;
 	}
@@ -374,6 +370,14 @@
         width: initial;
     }
 
+    #Featured .content .item:hover .head ul.indicators {
+	    bottom: -28%;
+	}
+
+	#Featured .content .item .head ul.indicators {
+		bottom: -32%;
+	}
+
     #Featured .content .body h6{
     	font-size: 15px;
     }
@@ -402,6 +406,10 @@
 
     header #SC-Carousel .SC-Carousel-inner .SC-Carousel-item.active .row .part2 img:nth-of-type(1) {
         transform: translate(-15%, 18%);
+    }
+
+    #Featured .content .item:hover .head i{
+    	bottom: 10%;
     }
 
     .popup.popup-buy .popup-box{

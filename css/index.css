@@ -422,7 +422,7 @@ header #SC-Carousel .SC-Carousel-inner .SC-Carousel-item.active .row .part2 img:
 #Featured .content .item .head ul.indicators{
 	position: absolute;
 	left: 50%;
-	bottom: -20%;
+	bottom: -27%;
     transform: translate(-50%, 50%);
 	opacity: 0;
 	transition-duration: 1s;
@@ -430,6 +430,7 @@ header #SC-Carousel .SC-Carousel-inner .SC-Carousel-item.active .row .part2 img:
 
 #Featured .content .item:hover .head ul.indicators{
 	transform: translate(-50%, -20%);
+	bottom: -20%;
 	opacity: 1;
 	transition-duration: 0.5s;
 	transition-delay: 0.8s;
