@@ -588,3 +588,9 @@ ul.color li.color.active{
 	background: #333333;
 	width: 500px;
 }
+
+.popup[data-popup-name="product"] .part2{
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
