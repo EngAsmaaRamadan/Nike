@@ -401,15 +401,17 @@ header #SC-Carousel .SC-Carousel-inner .SC-Carousel-item.active .row .part2 img:
     padding: 20px;
     transition-duration: 1s;
     position: absolute;
-    bottom: 22%;
+    bottom: 8%;
     left: 50%;
     opacity: 0;
-    transform: translate(-50%, 25px);
+    transform: translate(-50%, 60%);
 }
 
 #Featured .content .item:hover .head i{
 	opacity: 1;
 	transition-delay: 0.5s;
+	bottom: 15%;
+	transform: translate(-50%, 50%);
 }
 
 #Featured .content .item .head i:hover{
@@ -420,14 +422,14 @@ header #SC-Carousel .SC-Carousel-inner .SC-Carousel-item.active .row .part2 img:
 #Featured .content .item .head ul.indicators{
 	position: absolute;
 	left: 50%;
-	bottom: 0%;
-	transform: translate(-50%, 20px);
+	bottom: -20%;
+    transform: translate(-50%, 50%);
 	opacity: 0;
 	transition-duration: 1s;
 }
 
 #Featured .content .item:hover .head ul.indicators{
-	transform: translate(-50%, 0px);
+	transform: translate(-50%, -20%);
 	opacity: 1;
 	transition-duration: 0.5s;
 	transition-delay: 0.8s;
