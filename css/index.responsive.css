@@ -89,13 +89,13 @@
 	header #SC-Carousel > button.prev {
 	    right: 80px;
 	    left: initial;
-	    bottom: 5px;
+	    bottom: 5%;
 	    top: initial;
 	}
 
 	header #SC-Carousel > button.next {
 	    right: 20px;
-	    bottom: 5px;
+	    bottom: 5%;
 	    top: initial;
 	}
 
