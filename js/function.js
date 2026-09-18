@@ -375,7 +375,7 @@ function updateWhenRemove(that,isFeatures){
 function removeFromCartInPopup(that,productId,popupName,isFeatures){
 	console.log('hello from removeFromCartInPopup',popupName);
 	if(popupName.includes('shop')){
-		let btnOfLatestCurrentProduct = document.querySelector(`#latest .product[data-product-id='${productId}'] button`);
+		let btnOfLatestCurrentProduct = document.querySelector(`.product[data-product-id='${productId}'] button`);
 		console.log(btnOfLatestCurrentProduct);
 		removeFromCart(btnOfLatestCurrentProduct,productId,popupName);
 		if(cartProducts.length == 0){
